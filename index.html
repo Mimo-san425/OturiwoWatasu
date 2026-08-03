@@ -1,1 +1,2014 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
 
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>販売学習 おつりゲーム</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+
+  font-family:
+    "UD デジタル 教科書体 N-R",
+    "Hiragino Sans",
+    "Yu Gothic",
+    sans-serif;
+
+  background: #eef7fb;
+  color: #222;
+}
+
+button {
+  font-family: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 共通 */
+
+.screen {
+  width: 100%;
+  height: 100%;
+}
+
+.top-bar {
+  height: 11vh;
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 22px;
+
+  background: #ff8c9f;
+  border-bottom: 5px solid #fff;
+
+  color: #fff;
+}
+
+.top-title {
+  font-size: clamp(25px, 3vw, 42px);
+  font-weight: 900;
+
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+.top-button {
+  min-width: 150px;
+  min-height: 48px;
+
+  padding: 7px 15px;
+
+  border: 3px solid #fff;
+  border-radius: 15px;
+
+  background: #fff;
+  color: #c94465;
+
+  font-size: clamp(17px, 1.8vw, 24px);
+  font-weight: 900;
+}
+
+.top-spacer {
+  width: 150px;
+}
+
+/* 班選択画面 */
+
+#groupScreen {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-main {
+  flex: 1;
+  min-height: 0;
+
+  padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.group-guide {
+  margin-bottom: 20px;
+
+  text-align: center;
+
+  font-size: clamp(28px, 3.3vw, 45px);
+  font-weight: 900;
+}
+
+.group-grid {
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.group-button {
+  min-height: 190px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 6px solid #fff;
+  border-radius: 28px;
+
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.18);
+
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 900;
+}
+
+.group-button:active {
+  transform: translateY(5px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.18);
+}
+
+.group-icon {
+  margin-bottom: 12px;
+
+  font-size: clamp(62px, 7vw, 100px);
+}
+
+.handicraft {
+  background: #ffe1ea;
+  color: #9c3c62;
+}
+
+.gardening {
+  background: #e1f5d7;
+  color: #397327;
+}
+
+.pottery {
+  background: #f2e4d7;
+  color: #785038;
+}
+
+.recycle {
+  background: #def5ed;
+  color: #287055;
+}
+
+.craft {
+  background: #dcecff;
+  color: #315e8d;
+}
+
+/* 会計画面 */
+
+#registerScreen {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-main {
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 32% 28% 40%;
+  gap: 12px;
+
+  padding: 12px 12px 8px;
+}
+
+.step-panel {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 13px;
+
+  border: 5px solid #fff;
+  border-radius: 25px;
+
+  background: #fff;
+
+  box-shadow: 0 7px 17px rgba(0, 0, 0, 0.14);
+}
+
+.step-title {
+  min-height: 54px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 10px;
+
+  border-radius: 17px;
+
+  text-align: center;
+
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 900;
+}
+
+.step-number {
+  margin-right: 7px;
+  font-size: 1.25em;
+}
+
+/* ① 商品 */
+
+.product-step .step-title {
+  background: #fff0c8;
+  color: #8b5900;
+}
+
+.product-card {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 12px;
+
+  border: 5px solid #ffc758;
+  border-radius: 22px;
+
+  background: #fffaf0;
+}
+
+.product-image-box {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 17px;
+  background: #fff;
+}
+
+.product-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-fallback {
+  display: none;
+
+  padding: 12px;
+
+  text-align: center;
+
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 900;
+}
+
+.product-name {
+  width: 100%;
+  min-height: 54px;
+
+  margin-top: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  line-height: 1.25;
+
+  font-size: clamp(17px, 1.8vw, 26px);
+  font-weight: 900;
+
+  overflow-wrap: anywhere;
+}
+
+.group-name {
+  flex-shrink: 0;
+
+  margin-top: 7px;
+  padding: 5px 13px;
+
+  border-radius: 12px;
+
+  background: #efe7ff;
+  color: #674891;
+
+  font-size: clamp(16px, 1.5vw, 21px);
+  font-weight: 900;
+}
+
+.price-box {
+  width: 100%;
+  flex-shrink: 0;
+
+  margin-top: 10px;
+  padding: 9px;
+
+  text-align: center;
+
+  border: 4px solid #84cfff;
+  border-radius: 18px;
+
+  background: #eef9ff;
+}
+
+.price-label {
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 900;
+  color: #2b709c;
+}
+
+.price-value {
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 900;
+}
+
+/* ② お客さんのお金 */
+
+.customer-step .step-title {
+  background: #ffe4df;
+  color: #a44431;
+}
+
+.customer-money-box {
+  flex: 1;
+  min-height: 0;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 5px solid #f1b452;
+  border-radius: 22px;
+
+  background: linear-gradient(#fffaf0, #fff0c7);
+}
+
+.customer-hand {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  z-index: 1;
+
+  transform: translateX(-50%);
+
+  font-size: clamp(120px, 14vw, 190px);
+}
+
+.customer-money-list {
+  position: relative;
+  z-index: 2;
+
+  width: 94%;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding-bottom: 35px;
+}
+
+.customer-money-item {
+  width: 85px;
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-money-item.bill {
+  width: 145px;
+  height: 73px;
+}
+
+.customer-money-item img {
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.25));
+}
+
+.money-fallback {
+  display: none;
+
+  padding: 8px 10px;
+
+  border: 4px solid #9a6c00;
+  border-radius: 50%;
+
+  background: #efc640;
+
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.customer-money-item.bill .money-fallback,
+.selected-money-item.bill .money-fallback {
+  border-radius: 9px;
+  border-color: #3c7e58;
+
+  background: #bde3ca;
+}
+
+.payment-total {
+  flex-shrink: 0;
+
+  margin-top: 10px;
+  padding: 10px;
+
+  text-align: center;
+  line-height: 1.25;
+
+  border: 4px solid #f1b452;
+  border-radius: 17px;
+
+  background: #fff4d5;
+
+  font-size: clamp(21px, 2.3vw, 32px);
+  font-weight: 900;
+}
+
+/* ③ おつり */
+
+.change-step .step-title {
+  background: #dcf5e5;
+  color: #287048;
+}
+
+.answer-box {
+  flex-shrink: 0;
+
+  padding: 8px;
+
+  text-align: center;
+
+  border: 5px solid #ffb944;
+  border-radius: 18px;
+
+  background: #fff3ce;
+  color: #8c5200;
+}
+
+.answer-label {
+  font-size: clamp(17px, 1.7vw, 23px);
+  font-weight: 900;
+}
+
+.answer-value {
+  font-size: clamp(35px, 4vw, 56px);
+  font-weight: 900;
+}
+
+.selected-box {
+  flex-shrink: 0;
+
+  margin-top: 8px;
+  padding: 7px;
+
+  text-align: center;
+
+  border: 4px solid #62bd83;
+  border-radius: 16px;
+
+  background: #e6ffef;
+
+  font-size: clamp(20px, 2.1vw, 29px);
+  font-weight: 900;
+}
+
+.selected-hand-box {
+  min-height: 105px;
+
+  position: relative;
+
+  margin-top: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 4px solid #9bc8f6;
+  border-radius: 17px;
+
+  background: #edf6ff;
+}
+
+.selected-hand {
+  position: absolute;
+  left: 50%;
+  bottom: -52px;
+  z-index: 1;
+
+  transform: translateX(-50%);
+
+  font-size: clamp(110px, 12vw, 170px);
+}
+
+.selected-money-list {
+  position: relative;
+  z-index: 2;
+
+  width: 95%;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  padding-bottom: 28px;
+}
+
+.selected-money-item {
+  width: 49px;
+  height: 39px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected-money-item.bill {
+  width: 85px;
+  height: 43px;
+}
+
+.selected-money-item img {
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.22));
+}
+
+.selected-money-item .money-fallback {
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+/* お金選択ボタン */
+
+.money-guide {
+  flex-shrink: 0;
+
+  margin: 8px 0 5px;
+
+  text-align: center;
+
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 900;
+}
+
+.money-buttons {
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+
+  align-content: center;
+}
+
+.money-button {
+  min-height: 90px;
+
+  position: relative;
+
+  padding: 6px;
+
+  border: 4px solid #d2a02b;
+  border-radius: 18px;
+
+  background: #fff8d9;
+
+  box-shadow: 0 6px 0 #a87812;
+}
+
+.money-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #a87812;
+}
+
+.money-button img {
+  width: 100%;
+  height: 54px;
+
+  object-fit: contain;
+}
+
+.money-button-label {
+  font-size: clamp(17px, 1.7vw, 24px);
+  font-weight: 900;
+}
+
+.money-count {
+  position: absolute;
+  top: -8px;
+  right: -7px;
+
+  min-width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2px 6px;
+
+  border: 3px solid #fff;
+  border-radius: 18px;
+
+  background: #ff5971;
+  color: #fff;
+
+  font-size: 17px;
+  font-weight: 900;
+}
+
+/* 操作ボタン */
+
+.control-row {
+  flex-shrink: 0;
+
+  margin-top: 9px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 9px;
+}
+
+.control-button {
+  min-height: 55px;
+
+  border: none;
+  border-radius: 16px;
+
+  font-size: clamp(18px, 1.8vw, 25px);
+  font-weight: 900;
+
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+}
+
+.control-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+.reset-button {
+  background: #e9e9e9;
+  color: #444;
+}
+
+.give-button {
+  background: #ff7655;
+  color: #fff;
+}
+
+/* メッセージ */
+
+.message-bar {
+  position: static;
+  flex-shrink: 0;
+
+  width: calc(100% - 24px);
+  min-height: 58px;
+
+  margin: 0 12px 10px;
+  padding: 8px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid #ffd04c;
+  border-radius: 19px;
+
+  background: #fff9d9;
+
+  text-align: center;
+  line-height: 1.3;
+
+  font-size: clamp(18px, 1.9vw, 27px);
+  font-weight: 900;
+
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+/* 正解・不正解 */
+
+.judge-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.judge-layer.show {
+  display: flex;
+}
+
+.correct-mark {
+  width: min(33vw, 285px);
+  height: min(33vw, 285px);
+
+  border: 27px solid #f32d3c;
+  border-radius: 50%;
+
+  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, 0.25));
+}
+
+.wrong-mark {
+  width: min(33vw, 285px);
+  height: min(33vw, 285px);
+
+  position: relative;
+
+  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, 0.25));
+}
+
+.wrong-mark::before,
+.wrong-mark::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 43%;
+
+  width: 14%;
+  height: 100%;
+
+  border-radius: 20px;
+
+  background: #1672ff;
+}
+
+.wrong-mark::before {
+  transform: rotate(45deg);
+}
+
+.wrong-mark::after {
+  transform: rotate(-45deg);
+}
+
+/* 正解後画面 */
+
+.success-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.success-layer.show {
+  display: flex;
+}
+
+.success-card {
+  width: min(82vw, 680px);
+
+  padding: 30px;
+
+  text-align: center;
+
+  border: 8px solid #ffb72d;
+  border-radius: 32px;
+
+  background: #fff;
+
+  box-shadow: 0 13px 30px rgba(0, 0, 0, 0.28);
+}
+
+.success-icon {
+  font-size: clamp(60px, 7vw, 95px);
+}
+
+.success-title {
+  color: #ef506d;
+
+  font-size: clamp(38px, 5vw, 65px);
+  font-weight: 900;
+}
+
+.success-text {
+  margin: 12px 0 22px;
+
+  font-size: clamp(23px, 2.8vw, 36px);
+  font-weight: 900;
+}
+
+.success-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.success-button {
+  min-width: 240px;
+  min-height: 60px;
+
+  border: none;
+  border-radius: 17px;
+
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 900;
+
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+}
+
+.next-button {
+  background: #55b7f5;
+  color: #fff;
+}
+
+/* 高さが小さいiPad向け */
+
+@media screen and (max-height: 700px) {
+  .top-bar {
+    height: 9vh;
+    min-height: 54px;
+    padding: 6px 16px;
+  }
+
+  .top-title {
+    font-size: clamp(22px, 2.6vw, 34px);
+  }
+
+  .top-button {
+    min-height: 42px;
+    padding: 4px 12px;
+  }
+
+  .register-main {
+    padding: 7px 8px 5px;
+    gap: 7px;
+  }
+
+  .step-panel {
+    padding: 7px;
+    border-radius: 18px;
+  }
+
+  .step-title {
+    min-height: 39px;
+    margin-bottom: 5px;
+    font-size: clamp(17px, 1.8vw, 24px);
+  }
+
+  .product-card {
+    padding: 7px;
+  }
+
+  .product-name {
+    min-height: 42px;
+    margin-top: 5px;
+    font-size: clamp(15px, 1.55vw, 21px);
+  }
+
+  .group-name {
+    margin-top: 3px;
+    padding: 3px 8px;
+  }
+
+  .price-box {
+    margin-top: 5px;
+    padding: 4px;
+  }
+
+  .price-value {
+    font-size: clamp(28px, 3vw, 40px);
+  }
+
+  .payment-total {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: clamp(17px, 1.8vw, 24px);
+  }
+
+  .answer-box {
+    padding: 4px;
+  }
+
+  .answer-value {
+    font-size: clamp(28px, 3.2vw, 43px);
+  }
+
+  .selected-box {
+    margin-top: 4px;
+    padding: 4px;
+    font-size: clamp(17px, 1.8vw, 24px);
+  }
+
+  .selected-hand-box {
+    min-height: 67px;
+    margin-top: 4px;
+  }
+
+  .money-guide {
+    margin: 4px 0 2px;
+  }
+
+  .money-buttons {
+    gap: 5px;
+  }
+
+  .money-button {
+    min-height: 62px;
+    padding: 3px;
+  }
+
+  .money-button img {
+    height: 31px;
+  }
+
+  .money-button-label {
+    font-size: clamp(14px, 1.4vw, 19px);
+  }
+
+  .control-row {
+    margin-top: 5px;
+    gap: 5px;
+  }
+
+  .control-button {
+    min-height: 44px;
+  }
+
+  .message-bar {
+    width: calc(100% - 16px);
+    min-height: 46px;
+
+    margin: 0 8px 6px;
+    padding: 5px 10px;
+
+    font-size: clamp(16px, 1.7vw, 23px);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 班選択画面 -->
+
+<section id="groupScreen" class="screen">
+
+  <header class="top-bar">
+
+    <div class="top-title">
+      🏪 販売学習　おつりゲーム
+    </div>
+
+    <div class="top-spacer"></div>
+
+  </header>
+
+  <main class="group-main">
+
+    <div class="group-guide">
+      自分の班を選んでください
+    </div>
+
+    <div class="group-grid">
+
+      <button
+        class="group-button handicraft"
+        data-group="手工芸"
+      >
+        <span class="group-icon">🧵</span>
+        手工芸
+      </button>
+
+      <button
+        class="group-button gardening"
+        data-group="園芸"
+      >
+        <span class="group-icon">🌱</span>
+        園芸
+      </button>
+
+      <button
+        class="group-button pottery"
+        data-group="陶工"
+      >
+        <span class="group-icon">🏺</span>
+        陶工
+      </button>
+
+      <button
+        class="group-button recycle"
+        data-group="リサイクル"
+      >
+        <span class="group-icon">♻️</span>
+        リサイクル
+      </button>
+
+      <button
+        class="group-button craft"
+        data-group="工芸"
+      >
+        <span class="group-icon">🧺</span>
+        工芸
+      </button>
+
+    </div>
+
+  </main>
+
+</section>
+
+<!-- 会計画面 -->
+
+<section
+  id="registerScreen"
+  class="screen hidden"
+>
+
+  <header class="top-bar">
+
+    <div class="top-spacer"></div>
+
+    <div class="top-title">
+      レジの仕事
+    </div>
+
+    <button
+      class="top-button"
+      id="newProductButton"
+    >
+      別の商品
+    </button>
+
+  </header>
+
+  <main class="register-main">
+
+    <!-- ① 商品 -->
+
+    <section class="step-panel product-step">
+
+      <div class="step-title">
+        <span class="step-number">①</span>
+        商品を見る
+      </div>
+
+      <div class="product-card">
+
+        <div class="product-image-box">
+
+          <img
+            id="productImage"
+            src=""
+            alt=""
+          >
+
+          <div
+            class="product-fallback"
+            id="productFallback"
+          ></div>
+
+        </div>
+
+        <div
+          class="product-name"
+          id="productName"
+        ></div>
+
+        <div
+          class="group-name"
+          id="groupName"
+        ></div>
+
+        <div class="price-box">
+
+          <div class="price-label">
+            ねだん
+          </div>
+
+          <div class="price-value">
+            <span id="priceValue">0</span>円
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ② お客さんのお金 -->
+
+    <section class="step-panel customer-step">
+
+      <div class="step-title">
+        <span class="step-number">②</span>
+        お金を受け取る
+      </div>
+
+      <div class="customer-money-box">
+
+        <div
+          class="customer-money-list"
+          id="customerMoneyList"
+        ></div>
+
+        <div class="customer-hand">
+          🤲
+        </div>
+
+      </div>
+
+      <div class="payment-total">
+        受け取ったお金<br>
+        <span id="paymentTotal">0</span>円
+      </div>
+
+    </section>
+
+    <!-- ③ おつり -->
+
+    <section class="step-panel change-step">
+
+      <div class="step-title">
+        <span class="step-number">③</span>
+        おつりを渡す
+      </div>
+
+      <div class="answer-box">
+
+        <div class="answer-label">
+          渡すおつり
+        </div>
+
+        <div class="answer-value">
+          <span id="correctChange">0</span>円
+        </div>
+
+      </div>
+
+      <div class="selected-box">
+        選んだ金額：
+        <span id="selectedTotal">0</span>円
+      </div>
+
+      <div class="selected-hand-box">
+
+        <div
+          class="selected-money-list"
+          id="selectedMoneyList"
+        ></div>
+
+        <div class="selected-hand">
+          🤲
+        </div>
+
+      </div>
+
+      <div class="money-guide">
+        レジのお金をタップ
+      </div>
+
+      <div class="money-buttons">
+
+        <button
+          class="money-button"
+          data-value="1000"
+        >
+          <img
+            src="images/money_1000.png"
+            alt="1000円札"
+            onerror="this.style.display='none'"
+          >
+
+          <div class="money-button-label">
+            1000円
+          </div>
+
+          <span
+            class="money-count"
+            id="count1000"
+          >
+            0
+          </span>
+        </button>
+
+        <button
+          class="money-button"
+          data-value="500"
+        >
+          <img
+            src="images/money_500.png"
+            alt="500円玉"
+            onerror="this.style.display='none'"
+          >
+
+          <div class="money-button-label">
+            500円
+          </div>
+
+          <span
+            class="money-count"
+            id="count500"
+          >
+            0
+          </span>
+        </button>
+
+        <button
+          class="money-button"
+          data-value="100"
+        >
+          <img
+            src="images/money_100.png"
+            alt="100円玉"
+            onerror="this.style.display='none'"
+          >
+
+          <div class="money-button-label">
+            100円
+          </div>
+
+          <span
+            class="money-count"
+            id="count100"
+          >
+            0
+          </span>
+        </button>
+
+        <button
+          class="money-button"
+          data-value="50"
+        >
+          <img
+            src="images/money_50.png"
+            alt="50円玉"
+            onerror="this.style.display='none'"
+          >
+
+          <div class="money-button-label">
+            50円
+          </div>
+
+          <span
+            class="money-count"
+            id="count50"
+          >
+            0
+          </span>
+        </button>
+
+      </div>
+
+      <div class="control-row">
+
+        <button
+          class="control-button reset-button"
+          id="resetButton"
+        >
+          ぜんぶ戻す
+        </button>
+
+        <button
+          class="control-button give-button"
+          id="giveButton"
+        >
+          おつりを渡す
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <div
+    class="message-bar"
+    id="messageBar"
+  >
+    ①商品、②受け取ったお金、③おつりの順に確認しよう
+  </div>
+
+</section>
+
+<!-- 判定 -->
+
+<div
+  class="judge-layer"
+  id="judgeLayer"
+>
+  <div id="judgeMark"></div>
+</div>
+
+<!-- 正解後 -->
+
+<div
+  class="success-layer"
+  id="successLayer"
+>
+
+  <div class="success-card">
+
+    <div class="success-icon">
+      🎉🛍️🎉
+    </div>
+
+    <div class="success-title">
+      正解！
+    </div>
+
+    <div class="success-text">
+      ありがとうございました！
+    </div>
+
+    <div class="success-buttons">
+
+      <button
+        class="success-button next-button"
+        id="nextButton"
+      >
+        次のお客さん
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const products = [
+  {
+    group: "手工芸",
+    name: "ティッシュケース",
+    price: 200,
+    image: "images/tissue_case.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "ポーチ 小",
+    price: 600,
+    image: "images/pouch_small.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "ポーチ 大",
+    price: 1000,
+    image: "images/pouch_large.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "バンド",
+    price: 100,
+    image: "images/band.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "マグネット 2個セット",
+    price: 100,
+    image: "images/magnet_set.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "ヘアゴム 2個セット",
+    price: 100,
+    image: "images/hair_gum_set.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "マルチマット",
+    price: 1000,
+    image: "images/multi_mat.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "コースター ①",
+    price: 100,
+    image: "images/coaster_1.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "コースター ②",
+    price: 100,
+    image: "images/coaster_2.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "巾着袋",
+    price: 400,
+    image: "images/drawstring_bag.jpg"
+  },
+  {
+    group: "手工芸",
+    name: "エコバッグ",
+    price: 300,
+    image: "images/eco_bag.jpg"
+  },
+
+  {
+    group: "園芸",
+    name: "唐辛子",
+    price: 50,
+    image: "images/chili_pepper.jpg"
+  },
+  {
+    group: "園芸",
+    name: "100円野菜",
+    price: 100,
+    image: "images/vegetables.jpg"
+  },
+  {
+    group: "園芸",
+    name: "花苗 2個セット",
+    price: 100,
+    image: "images/flower_seedling_set.jpg"
+  },
+  {
+    group: "園芸",
+    name: "100円雑貨",
+    price: 100,
+    image: "images/gardening_goods.jpg"
+  },
+
+  {
+    group: "陶工",
+    name: "お皿",
+    price: 100,
+    image: "images/plate.jpg"
+  },
+
+  {
+    group: "リサイクル",
+    name: "メッセージカード 2個セット",
+    price: 100,
+    image: "images/message_card_set.jpg"
+  },
+
+  {
+    group: "工芸",
+    name: "クラフトバンド小物",
+    price: 200,
+    image: "images/craft_band_item.jpg"
+  },
+  {
+    group: "工芸",
+    name: "クラフトバンドかご",
+    price: 300,
+    image: "images/craft_band_basket.jpg"
+  },
+  {
+    group: "工芸",
+    name: "クラフトバンドコースター 2個セット",
+    price: 100,
+    image: "images/craft_band_coaster_set.jpg"
+  },
+  {
+    group: "工芸",
+    name: "クラフトバンドリース 2個セット",
+    price: 100,
+    image: "images/craft_band_wreath_set.jpg"
+  },
+  {
+    group: "工芸",
+    name: "木工鉛筆立て",
+    price: 300,
+    image: "images/wooden_pencil_holder.jpg"
+  },
+  {
+    group: "工芸",
+    name: "木工写真立て",
+    price: 300,
+    image: "images/wooden_photo_frame.jpg"
+  },
+  {
+    group: "工芸",
+    name: "寄木コースター",
+    price: 200,
+    image: "images/parquet_coaster.jpg"
+  },
+  {
+    group: "工芸",
+    name: "寄木キーホルダー",
+    price: 100,
+    image: "images/parquet_keychain.jpg"
+  },
+  {
+    group: "工芸",
+    name: "クラフトバンド小物入れ",
+    price: 400,
+    image: "images/craft_band_container.jpg"
+  }
+];
+
+const moneyValues = [
+  1000,
+  500,
+  100,
+  50
+];
+
+const moneyImages = {
+  1000: "images/money_1000.png",
+  500: "images/money_500.png",
+  100: "images/money_100.png",
+  50: "images/money_50.png"
+};
+
+let selectedGroup = "";
+let currentProduct = null;
+let previousProductName = "";
+
+let paymentMoney = [];
+let paymentAmount = 0;
+let correctChange = 0;
+
+let selectedMoney = [];
+let locked = false;
+
+const groupScreen =
+  document.getElementById("groupScreen");
+
+const registerScreen =
+  document.getElementById("registerScreen");
+
+const productImage =
+  document.getElementById("productImage");
+
+const productFallback =
+  document.getElementById("productFallback");
+
+const productName =
+  document.getElementById("productName");
+
+const groupName =
+  document.getElementById("groupName");
+
+const priceValue =
+  document.getElementById("priceValue");
+
+const customerMoneyList =
+  document.getElementById("customerMoneyList");
+
+const paymentTotalElement =
+  document.getElementById("paymentTotal");
+
+const correctChangeElement =
+  document.getElementById("correctChange");
+
+const selectedTotalElement =
+  document.getElementById("selectedTotal");
+
+const selectedMoneyList =
+  document.getElementById("selectedMoneyList");
+
+const messageBar =
+  document.getElementById("messageBar");
+
+const judgeLayer =
+  document.getElementById("judgeLayer");
+
+const judgeMark =
+  document.getElementById("judgeMark");
+
+const successLayer =
+  document.getElementById("successLayer");
+
+function showScreen(name) {
+  groupScreen.classList.add("hidden");
+  registerScreen.classList.add("hidden");
+
+  if (name === "group") {
+    groupScreen.classList.remove("hidden");
+  }
+
+  if (name === "register") {
+    registerScreen.classList.remove("hidden");
+  }
+}
+
+document
+  .querySelectorAll(".group-button")
+  .forEach(function(button) {
+    button.addEventListener("click", function() {
+      selectedGroup = button.dataset.group;
+      previousProductName = "";
+
+      startRandomProduct();
+    });
+  });
+
+function startRandomProduct() {
+  const groupProducts =
+    products.filter(function(product) {
+      return product.group === selectedGroup;
+    });
+
+  if (groupProducts.length === 0) {
+    alert("この班には商品がありません。");
+    return;
+  }
+
+  let candidates = groupProducts;
+
+  if (groupProducts.length > 1) {
+    candidates =
+      groupProducts.filter(function(product) {
+        return product.name !== previousProductName;
+      });
+  }
+
+  const randomIndex =
+    Math.floor(Math.random() * candidates.length);
+
+  const product =
+    candidates[randomIndex];
+
+  previousProductName =
+    product.name;
+
+  startCheckout(product);
+}
+
+function startCheckout(product) {
+  currentProduct = product;
+  selectedMoney = [];
+  locked = false;
+
+  makePayment(product.price);
+
+  productName.textContent =
+    product.name;
+
+  groupName.textContent =
+    product.group + "班";
+
+  priceValue.textContent =
+    product.price;
+
+  productImage.style.display =
+    "block";
+
+  productFallback.style.display =
+    "none";
+
+  productImage.src =
+    product.image;
+
+  productImage.alt =
+    product.name;
+
+  productImage.onerror =
+    function() {
+      productImage.style.display =
+        "none";
+
+      productFallback.style.display =
+        "block";
+
+      productFallback.textContent =
+        product.name;
+    };
+
+  paymentTotalElement.textContent =
+    paymentAmount;
+
+  correctChangeElement.textContent =
+    correctChange;
+
+  showCustomerMoney();
+  updateSelectedMoney();
+
+  messageBar.textContent =
+    "①商品、②受け取ったお金、③おつりの順に確認しよう";
+
+  successLayer.classList.remove("show");
+
+  showScreen("register");
+}
+
+function makePayment(price) {
+  let possiblePayments = [];
+
+  if (price === 50) {
+    possiblePayments = [100, 500];
+  }
+
+  if (price === 100) {
+    possiblePayments = [500, 1000];
+  }
+
+  if (price === 200) {
+    possiblePayments = [500, 1000];
+  }
+
+  if (price === 300) {
+    possiblePayments = [500, 1000];
+  }
+
+  if (price === 400) {
+    possiblePayments = [500, 1000];
+  }
+
+  if (price === 600) {
+    possiblePayments = [1000];
+  }
+
+  if (price === 1000) {
+    possiblePayments = [2000];
+  }
+
+  if (possiblePayments.length === 0) {
+    possiblePayments = [1000];
+  }
+
+  paymentAmount =
+    possiblePayments[
+      Math.floor(
+        Math.random() *
+        possiblePayments.length
+      )
+    ];
+
+  correctChange =
+    paymentAmount - price;
+
+  paymentMoney =
+    splitMoney(paymentAmount);
+}
+
+function splitMoney(total) {
+  const result = [];
+  let remaining = total;
+
+  moneyValues.forEach(function(value) {
+    while (remaining >= value) {
+      result.push(value);
+      remaining -= value;
+    }
+  });
+
+  return result;
+}
+
+function makeMoneyPicture(value, className) {
+  const wrapper =
+    document.createElement("div");
+
+  wrapper.className =
+    className;
+
+  if (value >= 1000) {
+    wrapper.classList.add("bill");
+  }
+
+  const image =
+    document.createElement("img");
+
+  image.src =
+    moneyImages[value];
+
+  image.alt =
+    value + "円";
+
+  const fallback =
+    document.createElement("div");
+
+  fallback.className =
+    "money-fallback";
+
+  fallback.textContent =
+    value + "円";
+
+  image.addEventListener("error", function() {
+    image.style.display = "none";
+    fallback.style.display = "block";
+  });
+
+  wrapper.appendChild(image);
+  wrapper.appendChild(fallback);
+
+  return wrapper;
+}
+
+function showCustomerMoney() {
+  customerMoneyList.innerHTML = "";
+
+  paymentMoney.forEach(function(value) {
+    const picture =
+      makeMoneyPicture(
+        value,
+        "customer-money-item"
+      );
+
+    customerMoneyList.appendChild(picture);
+  });
+}
+
+function getSelectedTotal() {
+  return selectedMoney.reduce(
+    function(total, value) {
+      return total + value;
+    },
+    0
+  );
+}
+
+function updateSelectedMoney() {
+  selectedTotalElement.textContent =
+    getSelectedTotal();
+
+  moneyValues.forEach(function(value) {
+    const count =
+      selectedMoney.filter(
+        function(selectedValue) {
+          return selectedValue === value;
+        }
+      ).length;
+
+    document.getElementById(
+      "count" + value
+    ).textContent = count;
+  });
+
+  selectedMoneyList.innerHTML = "";
+
+  selectedMoney.forEach(function(value) {
+    const picture =
+      makeMoneyPicture(
+        value,
+        "selected-money-item"
+      );
+
+    selectedMoneyList.appendChild(picture);
+  });
+}
+
+document
+  .querySelectorAll(".money-button")
+  .forEach(function(button) {
+    button.addEventListener("click", function() {
+      if (locked) {
+        return;
+      }
+
+      const value =
+        Number(button.dataset.value);
+
+      selectedMoney.push(value);
+
+      updateSelectedMoney();
+
+      messageBar.textContent =
+        "選んだおつりを確認して「おつりを渡す」を押そう";
+    });
+  });
+
+document
+  .getElementById("resetButton")
+  .addEventListener("click", function() {
+    if (locked) {
+      return;
+    }
+
+    selectedMoney = [];
+    updateSelectedMoney();
+
+    messageBar.textContent =
+      "おつりを選びなおそう";
+  });
+
+document
+  .getElementById("giveButton")
+  .addEventListener("click", function() {
+    if (locked) {
+      return;
+    }
+
+    locked = true;
+
+    const selectedTotal =
+      getSelectedTotal();
+
+    if (selectedTotal === correctChange) {
+      messageBar.textContent =
+        "正解！ ありがとうございました！";
+
+      showJudge(true);
+
+      setTimeout(function() {
+        successLayer.classList.add("show");
+      }, 900);
+
+    } else {
+      if (selectedTotal < correctChange) {
+        messageBar.textContent =
+          "おつりが足りません。もう一度選ぼう";
+      } else {
+        messageBar.textContent =
+          "おつりが多すぎます。もう一度選ぼう";
+      }
+
+      showJudge(false);
+
+      setTimeout(function() {
+        locked = false;
+        selectedMoney = [];
+
+        updateSelectedMoney();
+      }, 1000);
+    }
+  });
+
+function showJudge(isCorrect) {
+  judgeMark.className =
+    isCorrect
+      ? "correct-mark"
+      : "wrong-mark";
+
+  judgeLayer.classList.add("show");
+
+  setTimeout(function() {
+    judgeLayer.classList.remove("show");
+  }, 800);
+}
+
+document
+  .getElementById("newProductButton")
+  .addEventListener("click", function() {
+    successLayer.classList.remove("show");
+    startRandomProduct();
+  });
+
+document
+  .getElementById("nextButton")
+  .addEventListener("click", function() {
+    successLayer.classList.remove("show");
+    startRandomProduct();
+  });
+
+document.addEventListener(
+  "dblclick",
+  function(event) {
+    event.preventDefault();
+  },
+  {
+    passive: false
+  }
+);
+
+showScreen("group");
+</script>
+
+</body>
+</html>
