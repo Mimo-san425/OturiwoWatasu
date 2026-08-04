@@ -58,7 +58,7 @@ button {
 
 .group-header {
   height: 11vh;
-  min-height: 70px;
+  min-height: 68px;
 
   display: flex;
   align-items: center;
@@ -164,7 +164,7 @@ button {
 
 .register-header {
   height: 9vh;
-  min-height: 56px;
+  min-height: 54px;
 
   position: relative;
 
@@ -229,7 +229,7 @@ button {
 .panel {
   min-height: 0;
 
-  padding: 11px;
+  padding: 10px;
 
   border-radius: 20px;
 
@@ -239,18 +239,18 @@ button {
 }
 
 .panel-heading {
-  min-height: 42px;
+  min-height: 40px;
   flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 
   border-radius: 13px;
 
-  font-size: clamp(19px, 2vw, 28px);
+  font-size: clamp(18px, 1.9vw, 27px);
   font-weight: 900;
 }
 
@@ -273,8 +273,78 @@ button {
   min-height: 0;
 
   display: grid;
-  grid-template-columns: 46% 54%;
-  gap: 9px;
+  grid-template-rows: 36% 64%;
+  gap: 8px;
+}
+
+/* お預かり */
+
+.payment-area {
+  min-height: 0;
+
+  padding: 8px;
+
+  border: 4px solid #79bce4;
+  border-radius: 17px;
+
+  background: #edf8ff;
+
+  display: grid;
+  grid-template-columns: 135px 1fr 145px;
+  gap: 8px;
+  align-items: center;
+}
+
+.payment-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #286e99;
+
+  font-size: clamp(18px, 1.9vw, 27px);
+  font-weight: 900;
+}
+
+.customer-money-list {
+  min-width: 0;
+  min-height: 0;
+
+  height: 100%;
+
+  padding: 5px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border-radius: 13px;
+
+  background: #fff;
+}
+
+.payment-total {
+  min-height: 70px;
+
+  padding: 6px;
+
+  border-radius: 13px;
+
+  background: #d6eeff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  font-size: clamp(25px, 2.9vw, 41px);
+  font-weight: 900;
 }
 
 /* 商品 */
@@ -289,12 +359,13 @@ button {
 
   background: #fffaf0;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 44% 32% 24%;
+  gap: 8px;
+  align-items: stretch;
 }
 
 .product-image-box {
-  flex: 1;
   min-height: 0;
 
   display: flex;
@@ -304,6 +375,7 @@ button {
   overflow: hidden;
 
   border-radius: 13px;
+
   background: #fff;
 }
 
@@ -326,32 +398,36 @@ button {
 }
 
 .product-name {
-  min-height: 48px;
+  min-height: 0;
 
-  margin-top: 6px;
+  padding: 8px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.3;
 
   overflow-wrap: anywhere;
 
-  font-size: clamp(16px, 1.6vw, 23px);
+  font-size: clamp(18px, 1.9vw, 27px);
   font-weight: 900;
 }
 
 .price-display {
-  flex-shrink: 0;
+  min-height: 0;
 
-  margin-top: 6px;
   padding: 6px;
 
   border-radius: 13px;
 
   background: #ffec9e;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   text-align: center;
 }
@@ -364,130 +440,6 @@ button {
 
 .price-value {
   font-size: clamp(32px, 3.7vw, 50px);
-  font-weight: 900;
-}
-
-/* お客さんと支払い */
-
-.customer-area {
-  min-height: 0;
-
-  display: grid;
-  grid-template-rows: 48% 52%;
-  gap: 8px;
-}
-
-.customer-top {
-  min-height: 0;
-
-  display: grid;
-  grid-template-columns: 45% 55%;
-  gap: 7px;
-
-  padding: 7px;
-
-  border: 4px solid #eea78e;
-  border-radius: 17px;
-
-  background: #fff1ec;
-}
-
-.customer-picture {
-  min-height: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  border-radius: 13px;
-  background: #fff;
-}
-
-.customer-picture img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.customer-fallback {
-  display: none;
-  font-size: clamp(68px, 8vw, 115px);
-}
-
-.customer-speech {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 8px;
-
-  border: 3px solid #555;
-  border-radius: 18px;
-
-  background: #fff;
-
-  text-align: center;
-  line-height: 1.35;
-
-  font-size: clamp(16px, 1.65vw, 23px);
-  font-weight: 900;
-}
-
-/* 支払ったお金 */
-
-.payment-area {
-  min-height: 0;
-
-  padding: 7px;
-
-  border: 4px solid #79bce4;
-  border-radius: 17px;
-
-  background: #edf8ff;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.payment-label {
-  flex-shrink: 0;
-
-  text-align: center;
-
-  color: #286e99;
-
-  font-size: clamp(15px, 1.5vw, 21px);
-  font-weight: 900;
-}
-
-.customer-money-list {
-  flex: 1;
-  min-height: 0;
-
-  padding: 5px;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-
-  gap: 5px;
-}
-
-.payment-total {
-  flex-shrink: 0;
-
-  padding: 6px;
-
-  border-radius: 12px;
-
-  background: #d6eeff;
-
-  text-align: center;
-
-  font-size: clamp(19px, 2vw, 28px);
   font-weight: 900;
 }
 
@@ -507,12 +459,10 @@ button {
   color: #277048;
 }
 
-/* 会計表示 */
-
 .display-screen {
   flex-shrink: 0;
 
-  padding: 8px 11px;
+  padding: 7px 10px;
 
   border: 5px solid #39515f;
   border-radius: 12px;
@@ -523,7 +473,7 @@ button {
 }
 
 .display-row {
-  min-height: 48px;
+  min-height: 44px;
 
   display: flex;
   align-items: center;
@@ -531,7 +481,7 @@ button {
 
   border-bottom: 2px solid #9cb7a5;
 
-  font-size: clamp(17px, 1.7vw, 24px);
+  font-size: clamp(16px, 1.6vw, 23px);
   font-weight: 900;
 }
 
@@ -540,7 +490,7 @@ button {
 }
 
 .display-row strong {
-  font-size: clamp(24px, 2.7vw, 38px);
+  font-size: clamp(23px, 2.6vw, 37px);
 }
 
 .change-question {
@@ -552,8 +502,8 @@ button {
 .selected-area {
   flex-shrink: 0;
 
-  margin-top: 7px;
-  padding: 6px;
+  margin-top: 6px;
+  padding: 5px;
 
   border-radius: 13px;
 
@@ -563,20 +513,20 @@ button {
 }
 
 .selected-label {
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(13px, 1.3vw, 19px);
   font-weight: 900;
   color: #316b91;
 }
 
 .selected-value {
-  font-size: clamp(27px, 3vw, 42px);
+  font-size: clamp(26px, 2.9vw, 40px);
   font-weight: 900;
 }
 
 .selected-money-box {
-  min-height: 50px;
+  min-height: 46px;
 
-  margin-top: 5px;
+  margin-top: 4px;
   padding: 3px;
 
   border: 3px solid #9bc5df;
@@ -597,7 +547,7 @@ button {
 .money-guide {
   flex-shrink: 0;
 
-  margin: 6px 0 3px;
+  margin: 5px 0 3px;
 
   text-align: center;
 
@@ -619,7 +569,7 @@ button {
 }
 
 .money-button {
-  min-height: 84px;
+  min-height: 80px;
 
   position: relative;
 
@@ -640,7 +590,7 @@ button {
 
 .money-button img {
   width: 100%;
-  height: 43px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -677,7 +627,7 @@ button {
 .action-row {
   flex-shrink: 0;
 
-  margin-top: 7px;
+  margin-top: 6px;
 
   display: grid;
   grid-template-columns: 0.9fr 1fr 1.3fr;
@@ -685,7 +635,7 @@ button {
 }
 
 .action-button {
-  min-height: 49px;
+  min-height: 46px;
 
   border: none;
   border-radius: 13px;
@@ -719,9 +669,9 @@ button {
 .message {
   flex-shrink: 0;
 
-  min-height: 39px;
+  min-height: 36px;
 
-  margin-top: 6px;
+  margin-top: 5px;
   padding: 4px 7px;
 
   border-radius: 11px;
@@ -759,6 +709,7 @@ button {
 .money-picture img {
   max-width: 100%;
   max-height: 100%;
+
   object-fit: contain;
 
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
@@ -878,6 +829,7 @@ button {
 
 .success-layer {
   z-index: 60;
+
   background: rgba(0, 0, 0, 0.42);
 }
 
@@ -1003,86 +955,92 @@ button {
 @media screen and (max-height: 650px) {
   .register-header {
     height: 8vh;
-    min-height: 48px;
+    min-height: 47px;
   }
 
   .register-main {
-    padding: 6px;
-    gap: 6px;
+    padding: 5px;
+    gap: 5px;
   }
 
   .panel {
-    padding: 7px;
+    padding: 6px;
   }
 
   .panel-heading {
-    min-height: 33px;
-    margin-bottom: 5px;
+    min-height: 31px;
+    margin-bottom: 4px;
   }
 
-  .product-card,
-  .customer-top,
+  .sale-content {
+    gap: 5px;
+  }
+
   .payment-area {
     padding: 5px;
+    grid-template-columns: 115px 1fr 120px;
+  }
+
+  .payment-total {
+    min-height: 54px;
+  }
+
+  .product-card {
+    padding: 5px;
+    gap: 5px;
   }
 
   .product-name {
-    min-height: 36px;
-    margin-top: 4px;
-  }
-
-  .price-display {
-    margin-top: 4px;
-    padding: 4px;
+    padding: 5px;
   }
 
   .price-value {
-    font-size: clamp(27px, 3vw, 40px);
+    font-size: clamp(26px, 2.9vw, 39px);
   }
 
   .display-screen {
-    padding: 5px 8px;
+    padding: 4px 7px;
   }
 
   .display-row {
-    min-height: 37px;
+    min-height: 35px;
   }
 
   .selected-area {
-    margin-top: 5px;
-    padding: 4px;
+    margin-top: 4px;
+    padding: 3px;
   }
 
   .selected-money-box {
-    min-height: 38px;
-    margin-top: 4px;
+    min-height: 34px;
+    margin-top: 3px;
   }
 
   .money-guide {
-    margin: 4px 0 2px;
+    margin: 3px 0 2px;
   }
 
   .money-button {
-    min-height: 64px;
+    min-height: 61px;
     padding: 2px;
   }
 
   .money-button img {
-    height: 30px;
+    height: 28px;
   }
 
   .action-row {
-    margin-top: 5px;
-    gap: 5px;
+    margin-top: 4px;
+    gap: 4px;
   }
 
   .action-button {
-    min-height: 39px;
+    min-height: 37px;
   }
 
   .message {
-    min-height: 31px;
-    margin-top: 5px;
+    min-height: 29px;
+    margin-top: 4px;
   }
 }
 </style>
@@ -1162,10 +1120,29 @@ button {
     <section class="panel sale-panel">
 
       <div class="panel-heading">
-        商品とお客さん
+        お預かりと商品
       </div>
 
       <div class="sale-content">
+
+        <!-- お預かり -->
+
+        <div class="payment-area">
+
+          <div class="payment-label">
+            お預かり
+          </div>
+
+          <div
+            class="customer-money-list"
+            id="customerMoneyList"
+          ></div>
+
+          <div class="payment-total">
+            <span id="paymentTotal">0</span>円
+          </div>
+
+        </div>
 
         <!-- 商品 -->
 
@@ -1173,7 +1150,11 @@ button {
 
           <div class="product-image-box">
 
-            <img id="productImage" src="" alt="">
+            <img
+              id="productImage"
+              src=""
+              alt=""
+            >
 
             <div
               class="product-fallback"
@@ -1201,56 +1182,6 @@ button {
 
         </div>
 
-        <!-- お客さんとお金 -->
-
-        <div class="customer-area">
-
-          <div class="customer-top">
-
-            <div class="customer-picture">
-
-              <img
-                id="customerImage"
-                src="images/customer.png"
-                alt="お客さん"
-              >
-
-              <div
-                class="customer-fallback"
-                id="customerFallback"
-              >
-                🧑
-              </div>
-
-            </div>
-
-            <div class="customer-speech">
-              これで<br>
-              おねがいします
-            </div>
-
-          </div>
-
-          <div class="payment-area">
-
-            <div class="payment-label">
-              お客さんが出したお金
-            </div>
-
-            <div
-              class="customer-money-list"
-              id="customerMoneyList"
-            ></div>
-
-            <div class="payment-total">
-              合計
-              <span id="paymentTotal">0</span>円
-            </div>
-
-          </div>
-
-        </div>
-
       </div>
 
     </section>
@@ -1266,24 +1197,33 @@ button {
       <div class="display-screen">
 
         <div class="display-row">
-          <span>商品代</span>
 
-          <strong>
-            <span id="displayPrice">0</span>円
-          </strong>
-        </div>
-
-        <div class="display-row">
           <span>お預かり</span>
 
           <strong>
             <span id="displayPayment">0</span>円
           </strong>
+
+        </div>
+
+        <div class="display-row">
+
+          <span>商品代</span>
+
+          <strong>
+            <span id="displayPrice">0</span>円
+          </strong>
+
         </div>
 
         <div class="display-row change-question">
+
           <span>おつり</span>
-          <strong>？？？</strong>
+
+          <strong>
+            ？？？
+          </strong>
+
         </div>
 
       </div>
@@ -1323,7 +1263,9 @@ button {
             1000円
           </div>
 
-          <span class="money-count" id="count1000">0</span>
+          <span class="money-count" id="count1000">
+            0
+          </span>
 
         </button>
 
@@ -1339,7 +1281,9 @@ button {
             500円
           </div>
 
-          <span class="money-count" id="count500">0</span>
+          <span class="money-count" id="count500">
+            0
+          </span>
 
         </button>
 
@@ -1355,7 +1299,9 @@ button {
             100円
           </div>
 
-          <span class="money-count" id="count100">0</span>
+          <span class="money-count" id="count100">
+            0
+          </span>
 
         </button>
 
@@ -1371,7 +1317,9 @@ button {
             50円
           </div>
 
-          <span class="money-count" id="count50">0</span>
+          <span class="money-count" id="count50">
+            0
+          </span>
 
         </button>
 
@@ -1403,7 +1351,7 @@ button {
       </div>
 
       <div class="message" id="message">
-        商品代とお預かりを確認してください
+        お預かりと商品代を確認してください
       </div>
 
     </section>
@@ -1682,12 +1630,6 @@ const productName =
 const priceValue =
   document.getElementById("priceValue");
 
-const customerImage =
-  document.getElementById("customerImage");
-
-const customerFallback =
-  document.getElementById("customerFallback");
-
 const customerMoneyList =
   document.getElementById("customerMoneyList");
 
@@ -1723,11 +1665,6 @@ const successText =
 
 const clearLayer =
   document.getElementById("clearLayer");
-
-customerImage.addEventListener("error", function() {
-  customerImage.style.display = "none";
-  customerFallback.style.display = "block";
-});
 
 function showScreen(name) {
   groupScreen.classList.add("hidden");
@@ -1841,14 +1778,14 @@ function startCheckout(product) {
   updateSelectedMoney();
 
   message.textContent =
-    "商品代とお預かりを確認してください";
+    "お預かりと商品代を確認してください";
 
   successLayer.classList.remove("show");
 
   showScreen("register");
 }
 
-/* ちょうど払いを含む */
+/* ちょうど払いも含む */
 
 function makePayment(price) {
   let possiblePayments = [];
@@ -2130,6 +2067,7 @@ document
     }
 
     questionNumber++;
+
     startRandomProduct();
   });
 
