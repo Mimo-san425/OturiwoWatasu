@@ -30,12 +30,25 @@ body {
     "Yu Gothic",
     sans-serif;
 
-  background: #eaf1f5;
-  color: #222;
+  background: #e9f1f5;
+  color: #202020;
 }
 
 button {
   font-family: inherit;
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+ruby {
+  ruby-position: over;
+}
+
+rt {
+  font-size: 0.45em;
+  font-weight: 700;
 }
 
 .hidden {
@@ -47,9 +60,9 @@ button {
   height: 100%;
 }
 
-/* =========================
+/* ===================================
    班選択画面
-========================= */
+=================================== */
 
 #groupScreen {
   display: flex;
@@ -57,19 +70,19 @@ button {
 }
 
 .group-header {
-  height: 11vh;
-  min-height: 68px;
+  height: 12vh;
+  min-height: 72px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #1686c7;
+  background: #137fbd;
   color: #fff;
 
   border-bottom: 5px solid #fff;
 
-  font-size: clamp(27px, 3.2vw, 44px);
+  font-size: clamp(28px, 3.2vw, 44px);
   font-weight: 900;
 }
 
@@ -84,7 +97,9 @@ button {
 }
 
 .group-guide {
-  margin-bottom: 20px;
+  flex-shrink: 0;
+
+  margin-bottom: 22px;
 
   text-align: center;
 
@@ -98,11 +113,11 @@ button {
 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
 .group-button {
-  min-height: 180px;
+  min-height: 200px;
 
   display: flex;
   flex-direction: column;
@@ -110,52 +125,51 @@ button {
   justify-content: center;
 
   border: 5px solid #fff;
-  border-radius: 24px;
+  border-radius: 26px;
 
-  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: 0 9px 0 rgba(0, 0, 0, 0.2);
 
-  font-size: clamp(21px, 2.3vw, 33px);
+  font-size: clamp(23px, 2.5vw, 35px);
   font-weight: 900;
 }
 
 .group-button:active {
-  transform: translateY(5px);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 .group-icon {
-  margin-bottom: 10px;
-  font-size: clamp(56px, 6.7vw, 92px);
+  margin-bottom: 14px;
+  font-size: clamp(62px, 7vw, 100px);
 }
 
 .handicraft {
   background: #ffe0ea;
-  color: #9b3e62;
+  color: #963a5d;
 }
 
 .gardening {
-  background: #e1f5d6;
-  color: #3d742a;
+  background: #e2f5d8;
+  color: #397328;
 }
 
 .pottery {
-  background: #f2e4d6;
-  color: #795137;
+  background: #f3e5d8;
+  color: #795038;
 }
 
 .recycle {
-  background: #dff5ec;
-  color: #287258;
+  background: #dcf4eb;
+  color: #257056;
 }
 
 .craft {
-  background: #ddecff;
+  background: #dcecff;
   color: #315f8d;
 }
 
-/* =========================
+/* ===================================
    レジ画面
-========================= */
+=================================== */
 
 #registerScreen {
   display: flex;
@@ -163,8 +177,8 @@ button {
 }
 
 .register-header {
-  height: 9vh;
-  min-height: 54px;
+  height: 10vh;
+  min-height: 58px;
 
   position: relative;
 
@@ -172,47 +186,46 @@ button {
   align-items: center;
   justify-content: center;
 
-  padding: 5px 14px;
+  padding: 5px 16px;
 
-  background: #1686c7;
+  background: #137fbd;
   color: #fff;
 
   border-bottom: 5px solid #fff;
 }
 
 .register-title {
-  font-size: clamp(23px, 2.7vw, 37px);
+  font-size: clamp(24px, 2.8vw, 38px);
   font-weight: 900;
 }
 
-.group-badge,
-.progress-badge {
+.header-badge {
   position: absolute;
   top: 50%;
 
   transform: translateY(-50%);
 
-  min-width: 120px;
-  padding: 5px 12px;
+  min-width: 140px;
+  padding: 6px 14px;
 
   border: 3px solid #fff;
-  border-radius: 12px;
+  border-radius: 14px;
 
   background: #fff;
-  color: #176d9f;
+  color: #176c9d;
 
   text-align: center;
 
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.6vw, 23px);
   font-weight: 900;
 }
 
-.group-badge {
-  left: 13px;
+#groupBadge {
+  left: 15px;
 }
 
 .progress-badge {
-  right: 13px;
+  right: 15px;
 }
 
 .register-main {
@@ -220,43 +233,43 @@ button {
   min-height: 0;
 
   display: grid;
-  grid-template-columns: 55% 45%;
-  gap: 10px;
+  grid-template-columns: 52% 48%;
+  gap: 12px;
 
-  padding: 10px;
+  padding: 12px;
 }
 
 .panel {
   min-height: 0;
 
-  padding: 10px;
+  padding: 12px;
 
-  border-radius: 20px;
+  border-radius: 22px;
 
   background: #fff;
 
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .panel-heading {
-  min-height: 40px;
+  height: 48px;
   flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 7px;
+  margin-bottom: 9px;
 
-  border-radius: 13px;
+  border-radius: 15px;
 
-  font-size: clamp(18px, 1.9vw, 27px);
+  font-size: clamp(20px, 2.1vw, 30px);
   font-weight: 900;
 }
 
-/* =========================
+/* ===================================
    左側
-========================= */
+=================================== */
 
 .sale-panel {
   display: flex;
@@ -264,8 +277,8 @@ button {
 }
 
 .sale-panel .panel-heading {
-  background: #fff0c4;
-  color: #895500;
+  background: #fff0bd;
+  color: #855300;
 }
 
 .sale-content {
@@ -274,7 +287,7 @@ button {
 
   display: grid;
   grid-template-rows: 36% 64%;
-  gap: 8px;
+  gap: 10px;
 }
 
 /* お預かり */
@@ -282,17 +295,17 @@ button {
 .payment-area {
   min-height: 0;
 
-  padding: 8px;
-
-  border: 4px solid #79bce4;
-  border-radius: 17px;
-
-  background: #edf8ff;
+  padding: 10px;
 
   display: grid;
-  grid-template-columns: 135px 1fr 145px;
-  gap: 8px;
+  grid-template-columns: 150px 1fr 155px;
+  gap: 10px;
   align-items: center;
+
+  border: 5px solid #70b9e5;
+  border-radius: 19px;
+
+  background: #edf8ff;
 }
 
 .payment-label {
@@ -302,48 +315,47 @@ button {
 
   text-align: center;
 
-  color: #286e99;
+  color: #286f9b;
 
-  font-size: clamp(18px, 1.9vw, 27px);
+  font-size: clamp(21px, 2.2vw, 31px);
   font-weight: 900;
 }
 
-.customer-money-list {
+.payment-money-list {
   min-width: 0;
   min-height: 0;
-
   height: 100%;
 
-  padding: 5px;
+  padding: 7px;
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 
-  gap: 5px;
+  gap: 7px;
 
-  border-radius: 13px;
+  border-radius: 15px;
 
   background: #fff;
 }
 
 .payment-total {
-  min-height: 70px;
+  min-height: 90px;
 
-  padding: 6px;
-
-  border-radius: 13px;
-
-  background: #d6eeff;
+  padding: 8px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  border-radius: 15px;
+
+  background: #d5edff;
+
   text-align: center;
 
-  font-size: clamp(25px, 2.9vw, 41px);
+  font-size: clamp(29px, 3.3vw, 46px);
   font-weight: 900;
 }
 
@@ -352,17 +364,16 @@ button {
 .product-card {
   min-height: 0;
 
-  padding: 8px;
-
-  border: 4px solid #efc260;
-  border-radius: 17px;
-
-  background: #fffaf0;
+  padding: 10px;
 
   display: grid;
-  grid-template-columns: 44% 32% 24%;
-  gap: 8px;
-  align-items: stretch;
+  grid-template-columns: 47% 30% 23%;
+  gap: 10px;
+
+  border: 5px solid #efbf55;
+  border-radius: 19px;
+
+  background: #fffaf0;
 }
 
 .product-image-box {
@@ -374,7 +385,8 @@ button {
 
   overflow: hidden;
 
-  border-radius: 13px;
+  border: 3px solid #f0e3c8;
+  border-radius: 15px;
 
   background: #fff;
 }
@@ -388,12 +400,12 @@ button {
 .product-fallback {
   display: none;
 
-  padding: 10px;
+  padding: 12px;
 
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.35;
 
-  font-size: clamp(19px, 1.9vw, 27px);
+  font-size: clamp(20px, 2vw, 28px);
   font-weight: 900;
 }
 
@@ -407,81 +419,80 @@ button {
   justify-content: center;
 
   text-align: center;
-  line-height: 1.3;
-
+  line-height: 1.35;
   overflow-wrap: anywhere;
 
-  font-size: clamp(18px, 1.9vw, 27px);
+  font-size: clamp(19px, 2vw, 29px);
   font-weight: 900;
 }
 
 .price-display {
   min-height: 0;
 
-  padding: 6px;
-
-  border-radius: 13px;
-
-  background: #ffec9e;
+  padding: 7px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
+  border-radius: 15px;
+
+  background: #ffea91;
+
   text-align: center;
 }
 
 .price-label {
-  font-size: clamp(14px, 1.4vw, 19px);
+  font-size: clamp(15px, 1.5vw, 22px);
   font-weight: 900;
-  color: #865300;
+  color: #805000;
 }
 
 .price-value {
-  font-size: clamp(32px, 3.7vw, 50px);
+  font-size: clamp(35px, 4vw, 55px);
   font-weight: 900;
 }
 
-/* =========================
-   右側 会計
-========================= */
+/* ===================================
+   右側
+=================================== */
 
 .checkout-panel {
-  min-height: 0;
-
   display: flex;
   flex-direction: column;
 }
 
 .checkout-panel .panel-heading {
-  background: #ddf4e5;
-  color: #277048;
+  background: #dcf4e5;
+  color: #276f48;
 }
+
+/* 会計表示 */
 
 .display-screen {
   flex-shrink: 0;
 
-  padding: 7px 10px;
+  padding: 8px 12px;
 
-  border: 5px solid #39515f;
-  border-radius: 12px;
+  border: 5px solid #3c5360;
+  border-radius: 14px;
 
-  background: #eaf7ef;
+  background: #e8f6ed;
 
-  box-shadow: inset 0 0 0 3px #b8d6c2;
+  box-shadow: inset 0 0 0 3px #bad7c3;
 }
 
 .display-row {
-  min-height: 44px;
+  min-height: 48px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  border-bottom: 2px solid #9cb7a5;
+  border-bottom: 2px solid #9db7a6;
 
-  font-size: clamp(16px, 1.6vw, 23px);
+  font-size: clamp(18px, 1.8vw, 26px);
   font-weight: 900;
 }
 
@@ -490,211 +501,209 @@ button {
 }
 
 .display-row strong {
-  font-size: clamp(23px, 2.6vw, 37px);
+  font-size: clamp(27px, 3vw, 43px);
 }
 
 .change-question {
-  color: #c5521e;
+  color: #c44f1e;
 }
 
-/* 選んだ金額 */
+/* 選択金額 */
 
 .selected-area {
   flex-shrink: 0;
 
-  margin-top: 6px;
-  padding: 5px;
+  margin-top: 8px;
+  padding: 7px;
 
-  border-radius: 13px;
+  border-radius: 15px;
 
-  background: #e9f5ff;
+  background: #e7f4ff;
 
   text-align: center;
 }
 
 .selected-label {
-  font-size: clamp(13px, 1.3vw, 19px);
+  font-size: clamp(15px, 1.5vw, 22px);
   font-weight: 900;
-  color: #316b91;
+  color: #2e6991;
 }
 
 .selected-value {
-  font-size: clamp(26px, 2.9vw, 40px);
+  font-size: clamp(31px, 3.5vw, 48px);
   font-weight: 900;
 }
 
 .selected-money-box {
-  min-height: 46px;
+  min-height: 58px;
 
-  margin-top: 4px;
-  padding: 3px;
-
-  border: 3px solid #9bc5df;
-  border-radius: 11px;
-
-  background: #fff;
+  margin-top: 6px;
+  padding: 4px;
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 
-  gap: 2px;
+  gap: 3px;
 
   overflow: hidden;
+
+  border: 3px solid #96c2df;
+  border-radius: 13px;
+
+  background: #fff;
 }
 
 .money-guide {
   flex-shrink: 0;
 
-  margin: 5px 0 3px;
+  margin: 7px 0 5px;
 
   text-align: center;
 
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.6vw, 23px);
   font-weight: 900;
 }
 
-/* お金ボタン */
+/* 大きなお金ボタン */
 
 .money-buttons {
   flex: 1;
   min-height: 0;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 11px;
 
   align-content: center;
 }
 
 .money-button {
-  min-height: 80px;
+  min-height: 115px;
 
   position: relative;
 
-  padding: 4px;
+  padding: 8px;
 
-  border: 3px solid #84a4b6;
-  border-radius: 13px;
+  border: 4px solid #7899ac;
+  border-radius: 18px;
 
   background: #f5f9fb;
 
-  box-shadow: 0 4px 0 #627f8e;
+  box-shadow: 0 7px 0 #587788;
 }
 
 .money-button:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #627f8e;
+  box-shadow: 0 2px 0 #587788;
 }
 
 .money-button img {
   width: 100%;
-  height: 40px;
+  height: 65px;
   object-fit: contain;
 }
 
 .money-button-label {
-  font-size: clamp(14px, 1.4vw, 19px);
+  font-size: clamp(18px, 1.8vw, 26px);
   font-weight: 900;
 }
 
 .money-count {
   position: absolute;
-  top: -7px;
-  right: -6px;
+  top: -9px;
+  right: -8px;
 
-  min-width: 28px;
-  height: 28px;
-  padding: 1px 5px;
+  min-width: 38px;
+  height: 38px;
+  padding: 2px 7px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 3px solid #fff;
-  border-radius: 15px;
+  border: 4px solid #fff;
+  border-radius: 20px;
 
-  background: #ef5b70;
+  background: #ed536a;
   color: #fff;
 
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 900;
 }
 
-/* 操作ボタン */
+/* 大きな操作ボタン */
 
 .action-row {
   flex-shrink: 0;
 
-  margin-top: 6px;
+  margin-top: 10px;
 
   display: grid;
-  grid-template-columns: 0.9fr 1fr 1.3fr;
-  gap: 6px;
+  grid-template-columns: 0.9fr 1.15fr 1.45fr;
+  gap: 9px;
 }
 
 .action-button {
-  min-height: 46px;
+  min-height: 68px;
 
   border: none;
-  border-radius: 13px;
+  border-radius: 17px;
 
-  font-size: clamp(16px, 1.6vw, 22px);
+  font-size: clamp(18px, 1.9vw, 27px);
   font-weight: 900;
 
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.24);
 }
 
 .action-button:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.24);
 }
 
 .reset-button {
-  background: #e4e4e4;
-  color: #444;
+  background: #e2e2e2;
+  color: #3e3e3e;
 }
 
 .no-change-button {
-  background: #68bd80;
+  background: #62b97b;
   color: #fff;
 }
 
 .checkout-button {
-  background: #ef6c4f;
+  background: #ef694b;
   color: #fff;
 }
 
 .message {
   flex-shrink: 0;
 
-  min-height: 36px;
+  min-height: 48px;
 
-  margin-top: 5px;
-  padding: 4px 7px;
-
-  border-radius: 11px;
-
-  background: #fff3c3;
+  margin-top: 8px;
+  padding: 6px 10px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  border-radius: 14px;
+
+  background: #fff1b8;
+
   text-align: center;
 
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.6vw, 23px);
   font-weight: 900;
 }
 
-/* =========================
+/* ===================================
    お金画像
-========================= */
+=================================== */
 
 .money-picture {
-  width: 58px;
-  height: 43px;
+  width: 72px;
+  height: 55px;
 
   display: flex;
   align-items: center;
@@ -702,8 +711,8 @@ button {
 }
 
 .money-picture.bill {
-  width: 98px;
-  height: 48px;
+  width: 125px;
+  height: 60px;
 }
 
 .money-picture img {
@@ -718,41 +727,42 @@ button {
 .money-fallback {
   display: none;
 
-  padding: 5px 7px;
+  padding: 7px 9px;
 
-  border: 3px solid #8e6b00;
+  border: 3px solid #8e6900;
   border-radius: 50%;
 
   background: #e9c242;
 
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 900;
 }
 
 .money-picture.bill .money-fallback {
-  border-radius: 7px;
-  border-color: #3b7f58;
+  border-radius: 8px;
+  border-color: #397b55;
+
   background: #bae0c7;
 }
 
 .selected-money-box .money-picture {
-  width: 40px;
-  height: 30px;
+  width: 48px;
+  height: 36px;
 }
 
 .selected-money-box .money-picture.bill {
-  width: 68px;
-  height: 33px;
+  width: 82px;
+  height: 40px;
 }
 
 .selected-money-box .money-fallback {
-  padding: 2px 4px;
-  font-size: 10px;
+  padding: 3px 5px;
+  font-size: 11px;
 }
 
-/* =========================
+/* ===================================
    判定
-========================= */
+=================================== */
 
 .judge-layer {
   position: fixed;
@@ -771,22 +781,22 @@ button {
 }
 
 .correct-mark {
-  width: min(30vw, 260px);
-  height: min(30vw, 260px);
+  width: min(31vw, 270px);
+  height: min(31vw, 270px);
 
-  border: 25px solid #ef3340;
+  border: 26px solid #ef3340;
   border-radius: 50%;
 
-  filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, 0.25));
 }
 
 .wrong-mark {
-  width: min(30vw, 260px);
-  height: min(30vw, 260px);
+  width: min(31vw, 270px);
+  height: min(31vw, 270px);
 
   position: relative;
 
-  filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0 8px 7px rgba(0, 0, 0, 0.25));
 }
 
 .wrong-mark::before,
@@ -813,9 +823,9 @@ button {
   transform: rotate(-45deg);
 }
 
-/* =========================
+/* ===================================
    正解画面
-========================= */
+=================================== */
 
 .success-layer,
 .clear-layer {
@@ -830,7 +840,7 @@ button {
 .success-layer {
   z-index: 60;
 
-  background: rgba(0, 0, 0, 0.42);
+  background: rgba(0, 0, 0, 0.43);
 }
 
 .success-layer.show,
@@ -839,53 +849,53 @@ button {
 }
 
 .success-card {
-  width: min(72vw, 600px);
+  width: min(74vw, 620px);
 
-  padding: 28px;
+  padding: 30px;
 
-  border: 7px solid #1686c7;
-  border-radius: 27px;
+  border: 7px solid #137fbd;
+  border-radius: 29px;
 
   background: #fff;
 
   text-align: center;
 
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 15px 32px rgba(0, 0, 0, 0.29);
 }
 
 .success-title {
-  color: #e74d68;
+  color: #e64966;
 
-  font-size: clamp(40px, 5vw, 65px);
+  font-size: clamp(41px, 5vw, 66px);
   font-weight: 900;
 }
 
 .success-text {
-  margin: 12px 0 21px;
+  margin: 14px 0 23px;
 
-  font-size: clamp(22px, 2.6vw, 35px);
+  font-size: clamp(23px, 2.7vw, 36px);
   font-weight: 900;
 }
 
 .next-button {
-  min-width: 240px;
-  min-height: 57px;
+  min-width: 280px;
+  min-height: 70px;
 
   border: none;
-  border-radius: 16px;
+  border-radius: 18px;
 
-  background: #1686c7;
+  background: #137fbd;
   color: #fff;
 
-  font-size: clamp(20px, 2.1vw, 29px);
+  font-size: clamp(22px, 2.3vw, 31px);
   font-weight: 900;
 
-  box-shadow: 0 5px 0 #0d5f91;
+  box-shadow: 0 6px 0 #0b5987;
 }
 
-/* =========================
-   10問クリア
-========================= */
+/* ===================================
+   10問クリア画面
+=================================== */
 
 .clear-layer {
   z-index: 80;
@@ -899,90 +909,90 @@ button {
 }
 
 .clear-card {
-  width: min(84vw, 760px);
+  width: min(86vw, 780px);
 
-  padding: 34px;
+  padding: 37px;
 
-  border: 8px solid #1686c7;
-  border-radius: 32px;
+  border: 8px solid #137fbd;
+  border-radius: 34px;
 
   background: #fff;
 
   text-align: center;
 
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
 }
 
 .clear-icons {
-  font-size: clamp(52px, 7vw, 92px);
+  font-size: clamp(54px, 7vw, 94px);
 }
 
 .clear-title {
   color: #ef4966;
 
-  font-size: clamp(48px, 6.8vw, 88px);
+  font-size: clamp(50px, 7vw, 90px);
   font-weight: 900;
 }
 
 .clear-text {
-  margin: 16px 0 25px;
+  margin: 18px 0 28px;
 
-  font-size: clamp(24px, 3vw, 40px);
+  font-size: clamp(25px, 3vw, 41px);
   font-weight: 900;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .restart-button {
-  min-width: 260px;
-  min-height: 60px;
+  min-width: 290px;
+  min-height: 72px;
 
   border: none;
-  border-radius: 17px;
+  border-radius: 19px;
 
   background: #ffd75b;
   color: #333;
 
-  font-size: clamp(21px, 2.2vw, 30px);
+  font-size: clamp(22px, 2.3vw, 32px);
   font-weight: 900;
 
-  box-shadow: 0 5px 0 #c39b22;
+  box-shadow: 0 6px 0 #c39b22;
 }
 
-/* =========================
+/* ===================================
    高さが小さいiPad
-========================= */
+=================================== */
 
 @media screen and (max-height: 650px) {
   .register-header {
     height: 8vh;
-    min-height: 47px;
+    min-height: 48px;
   }
 
   .register-main {
-    padding: 5px;
-    gap: 5px;
+    padding: 6px;
+    gap: 6px;
   }
 
   .panel {
-    padding: 6px;
+    padding: 7px;
   }
 
   .panel-heading {
-    min-height: 31px;
-    margin-bottom: 4px;
+    height: 34px;
+    margin-bottom: 5px;
   }
 
   .sale-content {
-    gap: 5px;
+    gap: 6px;
   }
 
   .payment-area {
     padding: 5px;
-    grid-template-columns: 115px 1fr 120px;
+    grid-template-columns: 120px 1fr 125px;
   }
 
   .payment-total {
-    min-height: 54px;
+    min-height: 58px;
   }
 
   .product-card {
@@ -995,52 +1005,56 @@ button {
   }
 
   .price-value {
-    font-size: clamp(26px, 2.9vw, 39px);
+    font-size: clamp(27px, 3vw, 40px);
   }
 
   .display-screen {
-    padding: 4px 7px;
+    padding: 4px 8px;
   }
 
   .display-row {
-    min-height: 35px;
+    min-height: 36px;
   }
 
   .selected-area {
-    margin-top: 4px;
-    padding: 3px;
+    margin-top: 5px;
+    padding: 4px;
   }
 
   .selected-money-box {
-    min-height: 34px;
+    min-height: 38px;
     margin-top: 3px;
   }
 
   .money-guide {
-    margin: 3px 0 2px;
+    margin: 4px 0 2px;
+  }
+
+  .money-buttons {
+    gap: 6px;
   }
 
   .money-button {
-    min-height: 61px;
-    padding: 2px;
+    min-height: 75px;
+    padding: 3px;
   }
 
   .money-button img {
-    height: 28px;
+    height: 38px;
   }
 
   .action-row {
-    margin-top: 4px;
-    gap: 4px;
+    margin-top: 6px;
+    gap: 5px;
   }
 
   .action-button {
-    min-height: 37px;
+    min-height: 47px;
   }
 
   .message {
-    min-height: 29px;
-    margin-top: 4px;
+    min-height: 34px;
+    margin-top: 5px;
   }
 }
 </style>
@@ -1048,35 +1062,41 @@ button {
 
 <body>
 
-<!-- 班選択画面 -->
+<!-- ===================================
+     班選択画面
+=================================== -->
 
 <section id="groupScreen" class="screen">
 
   <header class="group-header">
-    販売学習　ぷちレジ
+    <ruby>販売<rt>はんばい</rt></ruby>
+    <ruby>学習<rt>がくしゅう</rt></ruby>　
+    ぷちレジ
   </header>
 
   <main class="group-main">
 
     <div class="group-guide">
-      自分の班を選んでください
+      <ruby>自分<rt>じぶん</rt></ruby>の
+      <ruby>班<rt>はん</rt></ruby>を
+      <ruby>選<rt>えら</rt></ruby>んでください
     </div>
 
     <div class="group-grid">
 
       <button class="group-button handicraft" data-group="手工芸">
         <span class="group-icon">🧵</span>
-        手工芸
+        <ruby>手工芸<rt>しゅこうげい</rt></ruby>
       </button>
 
       <button class="group-button gardening" data-group="園芸">
         <span class="group-icon">🌱</span>
-        園芸
+        <ruby>園芸<rt>えんげい</rt></ruby>
       </button>
 
       <button class="group-button pottery" data-group="陶工">
         <span class="group-icon">🏺</span>
-        陶工
+        <ruby>陶工<rt>とうこう</rt></ruby>
       </button>
 
       <button class="group-button recycle" data-group="リサイクル">
@@ -1086,7 +1106,7 @@ button {
 
       <button class="group-button craft" data-group="工芸">
         <span class="group-icon">🧺</span>
-        工芸
+        <ruby>工芸<rt>こうげい</rt></ruby>
       </button>
 
     </div>
@@ -1095,19 +1115,23 @@ button {
 
 </section>
 
-<!-- レジ画面 -->
+<!-- ===================================
+     レジ画面
+=================================== -->
 
 <section id="registerScreen" class="screen hidden">
 
   <header class="register-header">
 
-    <div class="group-badge" id="groupBadge"></div>
+    <div class="header-badge" id="groupBadge"></div>
 
     <div class="register-title">
-      販売学習　ぷちレジ
+      <ruby>販売<rt>はんばい</rt></ruby>
+      <ruby>学習<rt>がくしゅう</rt></ruby>　
+      ぷちレジ
     </div>
 
-    <div class="progress-badge">
+    <div class="header-badge progress-badge">
       <span id="questionNumber">1</span> / 10もん
     </div>
 
@@ -1120,7 +1144,9 @@ button {
     <section class="panel sale-panel">
 
       <div class="panel-heading">
-        お預かりと商品
+        <ruby>預<rt>あず</rt></ruby>かった
+        お<ruby>金<rt>かね</rt></ruby>と
+        <ruby>商品<rt>しょうひん</rt></ruby>
       </div>
 
       <div class="sale-content">
@@ -1130,16 +1156,17 @@ button {
         <div class="payment-area">
 
           <div class="payment-label">
-            お預かり
+            お<ruby>預<rt>あず</rt></ruby>かり
           </div>
 
           <div
-            class="customer-money-list"
-            id="customerMoneyList"
+            class="payment-money-list"
+            id="paymentMoneyList"
           ></div>
 
           <div class="payment-total">
-            <span id="paymentTotal">0</span>円
+            <span id="paymentTotal">0</span>
+            <ruby>円<rt>えん</rt></ruby>
           </div>
 
         </div>
@@ -1171,11 +1198,12 @@ button {
           <div class="price-display">
 
             <div class="price-label">
-              商品代
+              <ruby>商品代<rt>しょうひんだい</rt></ruby>
             </div>
 
             <div class="price-value">
-              <span id="priceValue">0</span>円
+              <span id="priceValue">0</span>
+              <ruby>円<rt>えん</rt></ruby>
             </div>
 
           </div>
@@ -1191,38 +1219,44 @@ button {
     <section class="panel checkout-panel">
 
       <div class="panel-heading">
-        会計
+        <ruby>会計<rt>かいけい</rt></ruby>
       </div>
 
       <div class="display-screen">
 
         <div class="display-row">
 
-          <span>お預かり</span>
+          <span>
+            お<ruby>預<rt>あず</rt></ruby>かり
+          </span>
 
           <strong>
-            <span id="displayPayment">0</span>円
+            <span id="displayPayment">0</span>
+            <ruby>円<rt>えん</rt></ruby>
           </strong>
 
         </div>
 
         <div class="display-row">
 
-          <span>商品代</span>
+          <span>
+            <ruby>商品代<rt>しょうひんだい</rt></ruby>
+          </span>
 
           <strong>
-            <span id="displayPrice">0</span>円
+            <span id="displayPrice">0</span>
+            <ruby>円<rt>えん</rt></ruby>
           </strong>
 
         </div>
 
         <div class="display-row change-question">
 
-          <span>おつり</span>
+          <span>
+            おつり
+          </span>
 
-          <strong>
-            ？？？
-          </strong>
+          <strong>？？？</strong>
 
         </div>
 
@@ -1231,11 +1265,13 @@ button {
       <div class="selected-area">
 
         <div class="selected-label">
-          渡す金額
+          <ruby>渡<rt>わた</rt></ruby>す
+          <ruby>金額<rt>きんがく</rt></ruby>
         </div>
 
         <div class="selected-value">
-          <span id="selectedTotal">0</span>円
+          <span id="selectedTotal">0</span>
+          <ruby>円<rt>えん</rt></ruby>
         </div>
 
         <div
@@ -1246,7 +1282,8 @@ button {
       </div>
 
       <div class="money-guide">
-        おつりのお金を選んでください
+        おつりのお<ruby>金<rt>かね</rt></ruby>を
+        <ruby>選<rt>えら</rt></ruby>んでください
       </div>
 
       <div class="money-buttons">
@@ -1260,7 +1297,7 @@ button {
           >
 
           <div class="money-button-label">
-            1000円
+            1000<ruby>円<rt>えん</rt></ruby>
           </div>
 
           <span class="money-count" id="count1000">
@@ -1278,7 +1315,7 @@ button {
           >
 
           <div class="money-button-label">
-            500円
+            500<ruby>円<rt>えん</rt></ruby>
           </div>
 
           <span class="money-count" id="count500">
@@ -1296,7 +1333,7 @@ button {
           >
 
           <div class="money-button-label">
-            100円
+            100<ruby>円<rt>えん</rt></ruby>
           </div>
 
           <span class="money-count" id="count100">
@@ -1314,7 +1351,7 @@ button {
           >
 
           <div class="money-button-label">
-            50円
+            50<ruby>円<rt>えん</rt></ruby>
           </div>
 
           <span class="money-count" id="count50">
@@ -1331,7 +1368,8 @@ button {
           class="action-button reset-button"
           id="resetButton"
         >
-          もどす
+          ひとつ
+          <ruby>戻<rt>もど</rt></ruby>す
         </button>
 
         <button
@@ -1345,13 +1383,15 @@ button {
           class="action-button checkout-button"
           id="checkoutButton"
         >
-          会計する
+          <ruby>会計<rt>かいけい</rt></ruby>する
         </button>
 
       </div>
 
       <div class="message" id="message">
-        お預かりと商品代を確認してください
+        お<ruby>預<rt>あず</rt></ruby>かりと
+        <ruby>商品代<rt>しょうひんだい</rt></ruby>を
+        <ruby>確認<rt>かくにん</rt></ruby>してください
       </div>
 
     </section>
@@ -1381,14 +1421,15 @@ button {
     </div>
 
     <button class="next-button" id="nextButton">
-      つぎのお客さん
+      つぎの
+      お<ruby>客<rt>きゃく</rt></ruby>さん
     </button>
 
   </div>
 
 </div>
 
-<!-- 10問クリア -->
+<!-- 10問正解 -->
 
 <div class="clear-layer" id="clearLayer">
 
@@ -1404,7 +1445,8 @@ button {
 
     <div class="clear-text">
       10もん せいかいしました！<br>
-      レジのおしごと ばっちりです！
+      レジのお<ruby>仕事<rt>しごと</rt></ruby>
+      ばっちりです！
     </div>
 
     <button class="restart-button" id="restartButton">
@@ -1416,70 +1458,85 @@ button {
 </div>
 
 <script>
+/* ===================================
+   商品データ
+=================================== */
+
 const products = [
   {
     group: "手工芸",
     name: "ティッシュケース",
+    nameHtml: "ティッシュケース",
     price: 200,
     image: "images/tissue_case.jpg"
   },
   {
     group: "手工芸",
     name: "ポーチ 小",
+    nameHtml: "ポーチ <ruby>小<rt>しょう</rt></ruby>",
     price: 600,
     image: "images/pouch_small.jpg"
   },
   {
     group: "手工芸",
     name: "ポーチ 大",
+    nameHtml: "ポーチ <ruby>大<rt>だい</rt></ruby>",
     price: 1000,
     image: "images/pouch_large.jpg"
   },
   {
     group: "手工芸",
     name: "バンド",
+    nameHtml: "バンド",
     price: 100,
     image: "images/band.jpg"
   },
   {
     group: "手工芸",
     name: "マグネット 2個セット",
+    nameHtml: "マグネット 2<ruby>個<rt>こ</rt></ruby>セット",
     price: 100,
     image: "images/magnet_set.jpg"
   },
   {
     group: "手工芸",
     name: "ヘアゴム 2個セット",
+    nameHtml: "ヘアゴム 2<ruby>個<rt>こ</rt></ruby>セット",
     price: 100,
     image: "images/hair_gum_set.jpg"
   },
   {
     group: "手工芸",
     name: "マルチマット",
+    nameHtml: "マルチマット",
     price: 1000,
     image: "images/multi_mat.jpg"
   },
   {
     group: "手工芸",
     name: "コースター ①",
+    nameHtml: "コースター ①",
     price: 100,
     image: "images/coaster_1.jpg"
   },
   {
     group: "手工芸",
     name: "コースター ②",
+    nameHtml: "コースター ②",
     price: 100,
     image: "images/coaster_2.jpg"
   },
   {
     group: "手工芸",
     name: "巾着袋",
+    nameHtml: "<ruby>巾着袋<rt>きんちゃくぶくろ</rt></ruby>",
     price: 400,
     image: "images/drawstring_bag.jpg"
   },
   {
     group: "手工芸",
     name: "エコバッグ",
+    nameHtml: "エコバッグ",
     price: 300,
     image: "images/eco_bag.jpg"
   },
@@ -1487,24 +1544,28 @@ const products = [
   {
     group: "園芸",
     name: "唐辛子",
+    nameHtml: "<ruby>唐辛子<rt>とうがらし</rt></ruby>",
     price: 50,
     image: "images/chili_pepper.jpg"
   },
   {
     group: "園芸",
     name: "100円野菜",
+    nameHtml: "100<ruby>円<rt>えん</rt></ruby><ruby>野菜<rt>やさい</rt></ruby>",
     price: 100,
     image: "images/vegetables.jpg"
   },
   {
     group: "園芸",
     name: "花苗 2個セット",
+    nameHtml: "<ruby>花苗<rt>はななえ</rt></ruby> 2<ruby>個<rt>こ</rt></ruby>セット",
     price: 100,
     image: "images/flower_seedling_set.jpg"
   },
   {
     group: "園芸",
     name: "100円雑貨",
+    nameHtml: "100<ruby>円<rt>えん</rt></ruby><ruby>雑貨<rt>ざっか</rt></ruby>",
     price: 100,
     image: "images/gardening_goods.jpg"
   },
@@ -1512,6 +1573,7 @@ const products = [
   {
     group: "陶工",
     name: "お皿",
+    nameHtml: "お<ruby>皿<rt>さら</rt></ruby>",
     price: 100,
     image: "images/plate.jpg"
   },
@@ -1519,6 +1581,7 @@ const products = [
   {
     group: "リサイクル",
     name: "メッセージカード 2個セット",
+    nameHtml: "メッセージカード 2<ruby>個<rt>こ</rt></ruby>セット",
     price: 100,
     image: "images/message_card_set.jpg"
   },
@@ -1526,58 +1589,83 @@ const products = [
   {
     group: "工芸",
     name: "クラフトバンド小物",
+    nameHtml: "クラフトバンド<ruby>小物<rt>こもの</rt></ruby>",
     price: 200,
     image: "images/craft_band_item.jpg"
   },
   {
     group: "工芸",
     name: "クラフトバンドかご",
+    nameHtml: "クラフトバンドかご",
     price: 300,
     image: "images/craft_band_basket.jpg"
   },
   {
     group: "工芸",
     name: "クラフトバンドコースター 2個セット",
+    nameHtml: "クラフトバンドコースター 2<ruby>個<rt>こ</rt></ruby>セット",
     price: 100,
     image: "images/craft_band_coaster_set.jpg"
   },
   {
     group: "工芸",
     name: "クラフトバンドリース 2個セット",
+    nameHtml: "クラフトバンドリース 2<ruby>個<rt>こ</rt></ruby>セット",
     price: 100,
     image: "images/craft_band_wreath_set.jpg"
   },
   {
     group: "工芸",
     name: "木工鉛筆立て",
+    nameHtml: "<ruby>木工<rt>もっこう</rt></ruby><ruby>鉛筆立<rt>えんぴつた</rt></ruby>て",
     price: 300,
     image: "images/wooden_pencil_holder.jpg"
   },
   {
     group: "工芸",
     name: "木工写真立て",
+    nameHtml: "<ruby>木工<rt>もっこう</rt></ruby><ruby>写真立<rt>しゃしんた</rt></ruby>て",
     price: 300,
     image: "images/wooden_photo_frame.jpg"
   },
   {
     group: "工芸",
     name: "寄木コースター",
+    nameHtml: "<ruby>寄木<rt>よせぎ</rt></ruby>コースター",
     price: 200,
     image: "images/parquet_coaster.jpg"
   },
   {
     group: "工芸",
     name: "寄木キーホルダー",
+    nameHtml: "<ruby>寄木<rt>よせぎ</rt></ruby>キーホルダー",
     price: 100,
     image: "images/parquet_keychain.jpg"
   },
   {
     group: "工芸",
     name: "クラフトバンド小物入れ",
+    nameHtml: "クラフトバンド<ruby>小物入<rt>こものい</rt></ruby>れ",
     price: 400,
     image: "images/craft_band_container.jpg"
   }
 ];
+
+/* ===================================
+   班名
+=================================== */
+
+const groupHtml = {
+  "手工芸": "<ruby>手工芸<rt>しゅこうげい</rt></ruby><ruby>班<rt>はん</rt></ruby>",
+  "園芸": "<ruby>園芸<rt>えんげい</rt></ruby><ruby>班<rt>はん</rt></ruby>",
+  "陶工": "<ruby>陶工<rt>とうこう</rt></ruby><ruby>班<rt>はん</rt></ruby>",
+  "リサイクル": "リサイクル<ruby>班<rt>はん</rt></ruby>",
+  "工芸": "<ruby>工芸<rt>こうげい</rt></ruby><ruby>班<rt>はん</rt></ruby>"
+};
+
+/* ===================================
+   お金
+=================================== */
 
 const moneyValues = [
   1000,
@@ -1593,6 +1681,10 @@ const moneyImages = {
   50: "images/money_50.png"
 };
 
+/* ===================================
+   状態
+=================================== */
+
 let selectedGroup = "";
 let previousProductName = "";
 
@@ -1605,6 +1697,10 @@ let correctChange = 0;
 
 let selectedMoney = [];
 let locked = false;
+
+/* ===================================
+   要素
+=================================== */
 
 const groupScreen =
   document.getElementById("groupScreen");
@@ -1630,8 +1726,8 @@ const productName =
 const priceValue =
   document.getElementById("priceValue");
 
-const customerMoneyList =
-  document.getElementById("customerMoneyList");
+const paymentMoneyList =
+  document.getElementById("paymentMoneyList");
 
 const paymentTotalElement =
   document.getElementById("paymentTotal");
@@ -1666,6 +1762,42 @@ const successText =
 const clearLayer =
   document.getElementById("clearLayer");
 
+/* ===================================
+   メッセージ
+=================================== */
+
+const messages = {
+  check:
+    "お<ruby>預<rt>あず</rt></ruby>かりと " +
+    "<ruby>商品代<rt>しょうひんだい</rt></ruby>を " +
+    "<ruby>確認<rt>かくにん</rt></ruby>してください",
+
+  selected:
+    "<ruby>渡<rt>わた</rt></ruby>す " +
+    "<ruby>金額<rt>きんがく</rt></ruby>を " +
+    "<ruby>確認<rt>かくにん</rt></ruby>してください",
+
+  reselect:
+    "おつりを " +
+    "<ruby>選<rt>えら</rt></ruby>びなおしてください",
+
+  hasChange:
+    "おつりがあります",
+
+  noChange:
+    "おつりはありません",
+
+  tooLittle:
+    "おつりがたりません",
+
+  tooMuch:
+    "おつりがおおすぎます"
+};
+
+/* ===================================
+   画面切り替え
+=================================== */
+
 function showScreen(name) {
   groupScreen.classList.add("hidden");
   registerScreen.classList.add("hidden");
@@ -1679,21 +1811,30 @@ function showScreen(name) {
   }
 }
 
+/* ===================================
+   班選択
+=================================== */
+
 document
   .querySelectorAll(".group-button")
   .forEach(function(button) {
     button.addEventListener("click", function() {
       selectedGroup = button.dataset.group;
       previousProductName = "";
+
       questionNumber = 1;
       correctCount = 0;
 
-      groupBadge.textContent =
-        selectedGroup + "班";
+      groupBadge.innerHTML =
+        groupHtml[selectedGroup];
 
       startRandomProduct();
     });
   });
+
+/* ===================================
+   商品を選ぶ
+=================================== */
 
 function startRandomProduct() {
   const groupProducts =
@@ -1726,6 +1867,10 @@ function startRandomProduct() {
   startCheckout(product);
 }
 
+/* ===================================
+   問題開始
+=================================== */
+
 function startCheckout(product) {
   selectedMoney = [];
   locked = false;
@@ -1735,8 +1880,8 @@ function startCheckout(product) {
   questionNumberElement.textContent =
     questionNumber;
 
-  productName.textContent =
-    product.name;
+  productName.innerHTML =
+    product.nameHtml;
 
   priceValue.textContent =
     product.price;
@@ -1745,6 +1890,9 @@ function startCheckout(product) {
     product.price;
 
   displayPayment.textContent =
+    paymentAmount;
+
+  paymentTotalElement.textContent =
     paymentAmount;
 
   productImage.style.display =
@@ -1767,25 +1915,24 @@ function startCheckout(product) {
       productFallback.style.display =
         "block";
 
-      productFallback.textContent =
-        product.name;
+      productFallback.innerHTML =
+        product.nameHtml;
     };
 
-  paymentTotalElement.textContent =
-    paymentAmount;
-
-  showCustomerMoney();
+  showPaymentMoney();
   updateSelectedMoney();
 
-  message.textContent =
-    "お預かりと商品代を確認してください";
+  message.innerHTML =
+    messages.check;
 
   successLayer.classList.remove("show");
 
   showScreen("register");
 }
 
-/* ちょうど払いも含む */
+/* ===================================
+   支払う金額
+=================================== */
 
 function makePayment(price) {
   let possiblePayments = [];
@@ -1829,6 +1976,10 @@ function makePayment(price) {
     splitMoney(paymentAmount);
 }
 
+/* ===================================
+   金額を金種に分ける
+=================================== */
+
 function splitMoney(total) {
   const result = [];
   let remaining = total;
@@ -1842,6 +1993,10 @@ function splitMoney(total) {
 
   return result;
 }
+
+/* ===================================
+   お金画像
+=================================== */
 
 function makeMoneyPicture(value) {
   const wrapper =
@@ -1869,8 +2024,8 @@ function makeMoneyPicture(value) {
   fallback.className =
     "money-fallback";
 
-  fallback.textContent =
-    value + "円";
+  fallback.innerHTML =
+    value + "<ruby>円<rt>えん</rt></ruby>";
 
   image.addEventListener("error", function() {
     image.style.display = "none";
@@ -1883,15 +2038,19 @@ function makeMoneyPicture(value) {
   return wrapper;
 }
 
-function showCustomerMoney() {
-  customerMoneyList.innerHTML = "";
+function showPaymentMoney() {
+  paymentMoneyList.innerHTML = "";
 
   paymentMoney.forEach(function(value) {
-    customerMoneyList.appendChild(
+    paymentMoneyList.appendChild(
       makeMoneyPicture(value)
     );
   });
 }
+
+/* ===================================
+   選んだおつり
+=================================== */
 
 function getSelectedTotal() {
   return selectedMoney.reduce(
@@ -1928,6 +2087,10 @@ function updateSelectedMoney() {
   });
 }
 
+/* ===================================
+   お金ボタン
+=================================== */
+
 document
   .querySelectorAll(".money-button")
   .forEach(function(button) {
@@ -1942,24 +2105,35 @@ document
 
       updateSelectedMoney();
 
-      message.textContent =
-        "渡す金額を確認してください";
+      message.innerHTML =
+        messages.selected;
     });
   });
+
+/* ===================================
+   ひとつ戻す
+=================================== */
 
 document
   .getElementById("resetButton")
   .addEventListener("click", function() {
-    if (locked) {
+    if (
+      locked ||
+      selectedMoney.length === 0
+    ) {
       return;
     }
 
-    selectedMoney = [];
+    selectedMoney.pop();
     updateSelectedMoney();
 
-    message.textContent =
-      "おつりを選びなおしてください";
+    message.innerHTML =
+      messages.reselect;
   });
+
+/* ===================================
+   おつりなし
+=================================== */
 
 document
   .getElementById("noChangeButton")
@@ -1971,18 +2145,23 @@ document
     locked = true;
 
     if (correctChange === 0) {
-      successText.textContent =
-        "ちょうどいただきました。ありがとうございました！";
+      successText.innerHTML =
+        "ちょうどいただきました。<br>" +
+        "ありがとうございました！";
 
       correctAnswer();
 
     } else {
-      message.textContent =
-        "おつりがあります";
+      message.innerHTML =
+        messages.hasChange;
 
       wrongAnswer();
     }
   });
+
+/* ===================================
+   会計する
+=================================== */
 
 document
   .getElementById("checkoutButton")
@@ -2000,28 +2179,34 @@ document
       correctChange > 0 &&
       selectedTotal === correctChange
     ) {
-      successText.textContent =
-        "おつりを正しく渡せました。ありがとうございました！";
+      successText.innerHTML =
+        "おつりをただしく " +
+        "<ruby>渡<rt>わた</rt></ruby>せました。<br>" +
+        "ありがとうございました！";
 
       correctAnswer();
 
     } else {
       if (correctChange === 0) {
-        message.textContent =
-          "おつりはありません";
+        message.innerHTML =
+          messages.noChange;
 
       } else if (selectedTotal < correctChange) {
-        message.textContent =
-          "おつりが足りません";
+        message.innerHTML =
+          messages.tooLittle;
 
       } else {
-        message.textContent =
-          "おつりが多すぎます";
+        message.innerHTML =
+          messages.tooMuch;
       }
 
       wrongAnswer();
     }
   });
+
+/* ===================================
+   正解・不正解
+=================================== */
 
 function correctAnswer() {
   correctCount++;
@@ -2056,6 +2241,10 @@ function showJudge(isCorrect) {
   }, 700);
 }
 
+/* ===================================
+   次の問題
+=================================== */
+
 document
   .getElementById("nextButton")
   .addEventListener("click", function() {
@@ -2071,6 +2260,10 @@ document
     startRandomProduct();
   });
 
+/* ===================================
+   もう一度
+=================================== */
+
 document
   .getElementById("restartButton")
   .addEventListener("click", function() {
@@ -2082,6 +2275,8 @@ document
 
     startRandomProduct();
   });
+
+/* ダブルタップ拡大防止 */
 
 document.addEventListener(
   "dblclick",
