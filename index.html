@@ -2,10 +2,12 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 >
+
 <title>販売学習 ぷちレジ</title>
 
 <style>
@@ -21,21 +23,19 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
+
   font-family:
     "UD デジタル 教科書体 N-R",
     "Hiragino Sans",
     "Yu Gothic",
     sans-serif;
-  background: #e9f1f5;
+
+  background: #eaf1f5;
   color: #222;
 }
 
 button {
   font-family: inherit;
-}
-
-button:disabled {
-  opacity: 0.35;
 }
 
 .hidden {
@@ -48,7 +48,7 @@ button:disabled {
 }
 
 /* =========================
-   班選択
+   班選択画面
 ========================= */
 
 #groupScreen {
@@ -57,51 +57,64 @@ button:disabled {
 }
 
 .group-header {
-  height: 12vh;
-  min-height: 74px;
+  height: 11vh;
+  min-height: 70px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   background: #1686c7;
   color: #fff;
+
   border-bottom: 5px solid #fff;
-  font-size: clamp(27px, 3.3vw, 45px);
+
+  font-size: clamp(27px, 3.2vw, 44px);
   font-weight: 900;
 }
 
 .group-main {
   flex: 1;
   min-height: 0;
+
   padding: 22px;
+
   display: flex;
   flex-direction: column;
 }
 
 .group-guide {
   margin-bottom: 20px;
+
   text-align: center;
-  font-size: clamp(27px, 3.1vw, 42px);
+
+  font-size: clamp(27px, 3vw, 42px);
   font-weight: 900;
 }
 
 .group-grid {
   flex: 1;
   min-height: 0;
+
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
 }
 
 .group-button {
-  min-height: 185px;
-  border: 5px solid #fff;
-  border-radius: 25px;
+  min-height: 180px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  border: 5px solid #fff;
+  border-radius: 24px;
+
   box-shadow: 0 8px 0 rgba(0, 0, 0, 0.18);
-  font-size: clamp(22px, 2.4vw, 34px);
+
+  font-size: clamp(21px, 2.3vw, 33px);
   font-weight: 900;
 }
 
@@ -112,7 +125,7 @@ button:disabled {
 
 .group-icon {
   margin-bottom: 10px;
-  font-size: clamp(58px, 7vw, 96px);
+  font-size: clamp(56px, 6.7vw, 92px);
 }
 
 .handicraft {
@@ -151,19 +164,24 @@ button:disabled {
 
 .register-header {
   height: 9vh;
-  min-height: 58px;
+  min-height: 56px;
+
   position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 15px;
+
+  padding: 5px 14px;
+
   background: #1686c7;
   color: #fff;
+
   border-bottom: 5px solid #fff;
 }
 
 .register-title {
-  font-size: clamp(24px, 2.8vw, 38px);
+  font-size: clamp(23px, 2.7vw, 37px);
   font-weight: 900;
 }
 
@@ -171,73 +189,106 @@ button:disabled {
 .progress-badge {
   position: absolute;
   top: 50%;
+
   transform: translateY(-50%);
+
   min-width: 120px;
-  padding: 6px 13px;
+  padding: 5px 12px;
+
   border: 3px solid #fff;
-  border-radius: 13px;
+  border-radius: 12px;
+
   background: #fff;
   color: #176d9f;
+
   text-align: center;
-  font-size: clamp(15px, 1.5vw, 21px);
+
+  font-size: clamp(14px, 1.4vw, 20px);
   font-weight: 900;
 }
 
 .group-badge {
-  left: 14px;
+  left: 13px;
 }
 
 .progress-badge {
-  right: 14px;
+  right: 13px;
 }
 
 .register-main {
   flex: 1;
   min-height: 0;
-  padding: 10px;
+
   display: grid;
-  grid-template-columns: 33% 29% 38%;
+  grid-template-columns: 55% 45%;
   gap: 10px;
+
+  padding: 10px;
 }
 
-.register-panel {
+.panel {
   min-height: 0;
+
   padding: 11px;
+
   border-radius: 20px;
+
   background: #fff;
+
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.14);
-  display: flex;
-  flex-direction: column;
 }
 
 .panel-heading {
+  min-height: 42px;
   flex-shrink: 0;
-  min-height: 44px;
-  margin-bottom: 8px;
-  border-radius: 14px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  margin-bottom: 8px;
+
+  border-radius: 13px;
+
   font-size: clamp(19px, 2vw, 28px);
   font-weight: 900;
 }
 
 /* =========================
-   商品
+   左側
 ========================= */
 
-.product-panel .panel-heading {
-  background: #fff0c4;
-  color: #8b5800;
+.sale-panel {
+  display: flex;
+  flex-direction: column;
 }
 
-.product-card {
+.sale-panel .panel-heading {
+  background: #fff0c4;
+  color: #895500;
+}
+
+.sale-content {
   flex: 1;
   min-height: 0;
-  padding: 9px;
+
+  display: grid;
+  grid-template-columns: 46% 54%;
+  gap: 9px;
+}
+
+/* 商品 */
+
+.product-card {
+  min-height: 0;
+
+  padding: 8px;
+
   border: 4px solid #efc260;
   border-radius: 17px;
+
   background: #fffaf0;
+
   display: flex;
   flex-direction: column;
 }
@@ -245,12 +296,15 @@ button:disabled {
 .product-image-box {
   flex: 1;
   min-height: 0;
-  border-radius: 13px;
-  background: #fff;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   overflow: hidden;
+
+  border-radius: 13px;
+  background: #fff;
 }
 
 .product-image-box img {
@@ -261,64 +315,94 @@ button:disabled {
 
 .product-fallback {
   display: none;
-  padding: 12px;
+
+  padding: 10px;
+
   text-align: center;
-  line-height: 1.35;
-  font-size: clamp(21px, 2.1vw, 30px);
+  line-height: 1.3;
+
+  font-size: clamp(19px, 1.9vw, 27px);
   font-weight: 900;
 }
 
 .product-name {
-  min-height: 52px;
-  margin-top: 7px;
+  min-height: 48px;
+
+  margin-top: 6px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.2;
+
   overflow-wrap: anywhere;
-  font-size: clamp(17px, 1.75vw, 25px);
+
+  font-size: clamp(16px, 1.6vw, 23px);
   font-weight: 900;
 }
 
 .price-display {
   flex-shrink: 0;
-  margin-top: 7px;
-  padding: 7px;
-  border-radius: 14px;
+
+  margin-top: 6px;
+  padding: 6px;
+
+  border-radius: 13px;
+
   background: #ffec9e;
+
   text-align: center;
 }
 
 .price-label {
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(14px, 1.4vw, 19px);
   font-weight: 900;
   color: #865300;
 }
 
 .price-value {
-  font-size: clamp(35px, 4vw, 55px);
+  font-size: clamp(32px, 3.7vw, 50px);
   font-weight: 900;
 }
 
-/* =========================
-   お客さん
-========================= */
+/* お客さんと支払い */
 
-.customer-panel .panel-heading {
-  background: #ffe3dc;
-  color: #9d4934;
+.customer-area {
+  min-height: 0;
+
+  display: grid;
+  grid-template-rows: 48% 52%;
+  gap: 8px;
+}
+
+.customer-top {
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 7px;
+
+  padding: 7px;
+
+  border: 4px solid #eea78e;
+  border-radius: 17px;
+
+  background: #fff1ec;
 }
 
 .customer-picture {
-  flex: 1;
   min-height: 0;
-  border-radius: 15px;
-  background: #fff3ee;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   overflow: hidden;
+
+  border-radius: 13px;
+  background: #fff;
 }
 
 .customer-picture img {
@@ -329,36 +413,51 @@ button:disabled {
 
 .customer-fallback {
   display: none;
-  font-size: clamp(90px, 11vw, 155px);
+  font-size: clamp(68px, 8vw, 115px);
 }
 
 .customer-speech {
-  flex-shrink: 0;
-  margin-top: 7px;
-  padding: 7px;
-  border-radius: 16px;
-  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
   border: 3px solid #555;
+  border-radius: 18px;
+
+  background: #fff;
+
   text-align: center;
-  font-size: clamp(17px, 1.7vw, 24px);
+  line-height: 1.35;
+
+  font-size: clamp(16px, 1.65vw, 23px);
   font-weight: 900;
 }
 
+/* 支払ったお金 */
+
 .payment-area {
-  flex-shrink: 0;
-  min-height: 135px;
-  margin-top: 8px;
+  min-height: 0;
+
   padding: 7px;
+
   border: 4px solid #79bce4;
-  border-radius: 16px;
+  border-radius: 17px;
+
   background: #edf8ff;
+
   display: flex;
   flex-direction: column;
 }
 
 .payment-label {
+  flex-shrink: 0;
+
   text-align: center;
+
   color: #286e99;
+
   font-size: clamp(15px, 1.5vw, 21px);
   font-weight: 900;
 }
@@ -366,47 +465,72 @@ button:disabled {
 .customer-money-list {
   flex: 1;
   min-height: 0;
-  padding: 4px;
+
+  padding: 5px;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+
+  gap: 5px;
 }
 
 .payment-total {
-  padding: 5px;
-  border-radius: 11px;
+  flex-shrink: 0;
+
+  padding: 6px;
+
+  border-radius: 12px;
+
   background: #d6eeff;
+
   text-align: center;
+
   font-size: clamp(19px, 2vw, 28px);
   font-weight: 900;
 }
 
 /* =========================
-   会計
+   右側 会計
 ========================= */
+
+.checkout-panel {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+}
 
 .checkout-panel .panel-heading {
   background: #ddf4e5;
   color: #277048;
 }
 
+/* 会計表示 */
+
 .display-screen {
   flex-shrink: 0;
-  padding: 9px 11px;
+
+  padding: 8px 11px;
+
   border: 5px solid #39515f;
   border-radius: 12px;
+
   background: #eaf7ef;
+
   box-shadow: inset 0 0 0 3px #b8d6c2;
 }
 
 .display-row {
-  min-height: 50px;
+  min-height: 48px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   border-bottom: 2px solid #9cb7a5;
+
   font-size: clamp(17px, 1.7vw, 24px);
   font-weight: 900;
 }
@@ -416,19 +540,25 @@ button:disabled {
 }
 
 .display-row strong {
-  font-size: clamp(25px, 2.8vw, 39px);
+  font-size: clamp(24px, 2.7vw, 38px);
 }
 
 .change-question {
   color: #c5521e;
 }
 
+/* 選んだ金額 */
+
 .selected-area {
   flex-shrink: 0;
-  margin-top: 8px;
-  padding: 7px;
-  border-radius: 14px;
+
+  margin-top: 7px;
+  padding: 6px;
+
+  border-radius: 13px;
+
   background: #e9f5ff;
+
   text-align: center;
 }
 
@@ -444,44 +574,62 @@ button:disabled {
 }
 
 .selected-money-box {
-  min-height: 55px;
-  margin-top: 6px;
-  padding: 4px;
+  min-height: 50px;
+
+  margin-top: 5px;
+  padding: 3px;
+
   border: 3px solid #9bc5df;
-  border-radius: 12px;
+  border-radius: 11px;
+
   background: #fff;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+
+  gap: 2px;
+
   overflow: hidden;
 }
 
 .money-guide {
   flex-shrink: 0;
-  margin: 7px 0 4px;
+
+  margin: 6px 0 3px;
+
   text-align: center;
-  font-size: clamp(15px, 1.5vw, 21px);
+
+  font-size: clamp(14px, 1.4vw, 20px);
   font-weight: 900;
 }
+
+/* お金ボタン */
 
 .money-buttons {
   flex: 1;
   min-height: 0;
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
+  gap: 6px;
+
   align-content: center;
 }
 
 .money-button {
-  min-height: 91px;
+  min-height: 84px;
+
   position: relative;
-  padding: 5px;
+
+  padding: 4px;
+
   border: 3px solid #84a4b6;
-  border-radius: 14px;
+  border-radius: 13px;
+
   background: #f5f9fb;
+
   box-shadow: 0 4px 0 #627f8e;
 }
 
@@ -492,12 +640,12 @@ button:disabled {
 
 .money-button img {
   width: 100%;
-  height: 48px;
+  height: 43px;
   object-fit: contain;
 }
 
 .money-button-label {
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(14px, 1.4vw, 19px);
   font-weight: 900;
 }
 
@@ -505,34 +653,46 @@ button:disabled {
   position: absolute;
   top: -7px;
   right: -6px;
-  min-width: 29px;
-  height: 29px;
+
+  min-width: 28px;
+  height: 28px;
   padding: 1px 5px;
-  border: 3px solid #fff;
-  border-radius: 16px;
-  background: #ef5b70;
-  color: #fff;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border: 3px solid #fff;
+  border-radius: 15px;
+
+  background: #ef5b70;
+  color: #fff;
+
   font-size: 14px;
   font-weight: 900;
 }
 
+/* 操作ボタン */
+
 .action-row {
   flex-shrink: 0;
-  margin-top: 8px;
+
+  margin-top: 7px;
+
   display: grid;
   grid-template-columns: 0.9fr 1fr 1.3fr;
-  gap: 7px;
+  gap: 6px;
 }
 
 .action-button {
-  min-height: 52px;
+  min-height: 49px;
+
   border: none;
-  border-radius: 14px;
-  font-size: clamp(16px, 1.6vw, 23px);
+  border-radius: 13px;
+
+  font-size: clamp(16px, 1.6vw, 22px);
   font-weight: 900;
+
   box-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
 }
 
@@ -558,16 +718,23 @@ button:disabled {
 
 .message {
   flex-shrink: 0;
-  min-height: 42px;
-  margin-top: 7px;
-  padding: 5px 8px;
-  border-radius: 12px;
+
+  min-height: 39px;
+
+  margin-top: 6px;
+  padding: 4px 7px;
+
+  border-radius: 11px;
+
   background: #fff3c3;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-align: center;
-  font-size: clamp(15px, 1.5vw, 21px);
+
+  font-size: clamp(14px, 1.4vw, 20px);
   font-weight: 900;
 }
 
@@ -576,31 +743,37 @@ button:disabled {
 ========================= */
 
 .money-picture {
-  width: 60px;
-  height: 45px;
+  width: 58px;
+  height: 43px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .money-picture.bill {
-  width: 102px;
-  height: 50px;
+  width: 98px;
+  height: 48px;
 }
 
 .money-picture img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
 }
 
 .money-fallback {
   display: none;
+
   padding: 5px 7px;
+
   border: 3px solid #8e6b00;
   border-radius: 50%;
+
   background: #e9c242;
+
   font-size: 13px;
   font-weight: 900;
 }
@@ -612,13 +785,13 @@ button:disabled {
 }
 
 .selected-money-box .money-picture {
-  width: 43px;
-  height: 32px;
+  width: 40px;
+  height: 30px;
 }
 
 .selected-money-box .money-picture.bill {
-  width: 73px;
-  height: 36px;
+  width: 68px;
+  height: 33px;
 }
 
 .selected-money-box .money-fallback {
@@ -634,9 +807,11 @@ button:disabled {
   position: fixed;
   inset: 0;
   z-index: 50;
+
   display: none;
   align-items: center;
   justify-content: center;
+
   pointer-events: none;
 }
 
@@ -647,27 +822,35 @@ button:disabled {
 .correct-mark {
   width: min(30vw, 260px);
   height: min(30vw, 260px);
+
   border: 25px solid #ef3340;
   border-radius: 50%;
+
   filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
 }
 
 .wrong-mark {
   width: min(30vw, 260px);
   height: min(30vw, 260px);
+
   position: relative;
+
   filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.25));
 }
 
 .wrong-mark::before,
 .wrong-mark::after {
   content: "";
+
   position: absolute;
   top: 0;
   left: 43%;
+
   width: 14%;
   height: 100%;
+
   border-radius: 18px;
+
   background: #1973ef;
 }
 
@@ -680,13 +863,14 @@ button:disabled {
 }
 
 /* =========================
-   1問正解
+   正解画面
 ========================= */
 
 .success-layer,
 .clear-layer {
   position: fixed;
   inset: 0;
+
   display: none;
   align-items: center;
   justify-content: center;
@@ -704,22 +888,29 @@ button:disabled {
 
 .success-card {
   width: min(72vw, 600px);
+
   padding: 28px;
+
   border: 7px solid #1686c7;
   border-radius: 27px;
+
   background: #fff;
+
   text-align: center;
+
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
 }
 
 .success-title {
   color: #e74d68;
+
   font-size: clamp(40px, 5vw, 65px);
   font-weight: 900;
 }
 
 .success-text {
   margin: 12px 0 21px;
+
   font-size: clamp(22px, 2.6vw, 35px);
   font-weight: 900;
 }
@@ -727,12 +918,16 @@ button:disabled {
 .next-button {
   min-width: 240px;
   min-height: 57px;
+
   border: none;
   border-radius: 16px;
+
   background: #1686c7;
   color: #fff;
+
   font-size: clamp(20px, 2.1vw, 29px);
   font-weight: 900;
+
   box-shadow: 0 5px 0 #0d5f91;
 }
 
@@ -742,20 +937,27 @@ button:disabled {
 
 .clear-layer {
   z-index: 80;
+
   background:
     radial-gradient(circle, #fff38c 0 8%, transparent 9%),
     radial-gradient(circle, #ffaec2 0 7%, transparent 8%),
     #cceeff;
+
   background-size: 100px 100px, 140px 140px;
 }
 
 .clear-card {
   width: min(84vw, 760px);
+
   padding: 34px;
+
   border: 8px solid #1686c7;
   border-radius: 32px;
+
   background: #fff;
+
   text-align: center;
+
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
 }
 
@@ -765,12 +967,14 @@ button:disabled {
 
 .clear-title {
   color: #ef4966;
+
   font-size: clamp(48px, 6.8vw, 88px);
   font-weight: 900;
 }
 
 .clear-text {
   margin: 16px 0 25px;
+
   font-size: clamp(24px, 3vw, 40px);
   font-weight: 900;
   line-height: 1.5;
@@ -779,12 +983,16 @@ button:disabled {
 .restart-button {
   min-width: 260px;
   min-height: 60px;
+
   border: none;
   border-radius: 17px;
+
   background: #ffd75b;
   color: #333;
+
   font-size: clamp(21px, 2.2vw, 30px);
   font-weight: 900;
+
   box-shadow: 0 5px 0 #c39b22;
 }
 
@@ -795,7 +1003,7 @@ button:disabled {
 @media screen and (max-height: 650px) {
   .register-header {
     height: 8vh;
-    min-height: 49px;
+    min-height: 48px;
   }
 
   .register-main {
@@ -803,21 +1011,23 @@ button:disabled {
     gap: 6px;
   }
 
-  .register-panel {
+  .panel {
     padding: 7px;
   }
 
   .panel-heading {
-    min-height: 34px;
+    min-height: 33px;
     margin-bottom: 5px;
   }
 
-  .product-card {
-    padding: 6px;
+  .product-card,
+  .customer-top,
+  .payment-area {
+    padding: 5px;
   }
 
   .product-name {
-    min-height: 38px;
+    min-height: 36px;
     margin-top: 4px;
   }
 
@@ -830,23 +1040,12 @@ button:disabled {
     font-size: clamp(27px, 3vw, 40px);
   }
 
-  .customer-speech {
-    margin-top: 4px;
-    padding: 4px;
-  }
-
-  .payment-area {
-    min-height: 104px;
-    margin-top: 5px;
-    padding: 4px;
-  }
-
   .display-screen {
     padding: 5px 8px;
   }
 
   .display-row {
-    min-height: 38px;
+    min-height: 37px;
   }
 
   .selected-area {
@@ -855,7 +1054,7 @@ button:disabled {
   }
 
   .selected-money-box {
-    min-height: 40px;
+    min-height: 38px;
     margin-top: 4px;
   }
 
@@ -864,12 +1063,12 @@ button:disabled {
   }
 
   .money-button {
-    min-height: 67px;
+    min-height: 64px;
     padding: 2px;
   }
 
   .money-button img {
-    height: 32px;
+    height: 30px;
   }
 
   .action-row {
@@ -878,11 +1077,11 @@ button:disabled {
   }
 
   .action-button {
-    min-height: 41px;
+    min-height: 39px;
   }
 
   .message {
-    min-height: 33px;
+    min-height: 31px;
     margin-top: 5px;
   }
 }
@@ -958,40 +1157,96 @@ button:disabled {
 
   <main class="register-main">
 
-    <!-- 商品 -->
+    <!-- 左側 -->
 
-    <section class="register-panel product-panel">
+    <section class="panel sale-panel">
 
       <div class="panel-heading">
-        商品
+        商品とお客さん
       </div>
 
-      <div class="product-card">
+      <div class="sale-content">
 
-        <div class="product-image-box">
+        <!-- 商品 -->
 
-          <img id="productImage" src="" alt="">
+        <div class="product-card">
+
+          <div class="product-image-box">
+
+            <img id="productImage" src="" alt="">
+
+            <div
+              class="product-fallback"
+              id="productFallback"
+            ></div>
+
+          </div>
 
           <div
-            class="product-fallback"
-            id="productFallback"
+            class="product-name"
+            id="productName"
           ></div>
 
-        </div>
+          <div class="price-display">
 
-        <div
-          class="product-name"
-          id="productName"
-        ></div>
+            <div class="price-label">
+              商品代
+            </div>
 
-        <div class="price-display">
+            <div class="price-value">
+              <span id="priceValue">0</span>円
+            </div>
 
-          <div class="price-label">
-            商品代
           </div>
 
-          <div class="price-value">
-            <span id="priceValue">0</span>円
+        </div>
+
+        <!-- お客さんとお金 -->
+
+        <div class="customer-area">
+
+          <div class="customer-top">
+
+            <div class="customer-picture">
+
+              <img
+                id="customerImage"
+                src="images/customer.png"
+                alt="お客さん"
+              >
+
+              <div
+                class="customer-fallback"
+                id="customerFallback"
+              >
+                🧑
+              </div>
+
+            </div>
+
+            <div class="customer-speech">
+              これで<br>
+              おねがいします
+            </div>
+
+          </div>
+
+          <div class="payment-area">
+
+            <div class="payment-label">
+              お客さんが出したお金
+            </div>
+
+            <div
+              class="customer-money-list"
+              id="customerMoneyList"
+            ></div>
+
+            <div class="payment-total">
+              合計
+              <span id="paymentTotal">0</span>円
+            </div>
+
           </div>
 
         </div>
@@ -1000,58 +1255,9 @@ button:disabled {
 
     </section>
 
-    <!-- お客さん -->
+    <!-- 右側 -->
 
-    <section class="register-panel customer-panel">
-
-      <div class="panel-heading">
-        お客さん
-      </div>
-
-      <div class="customer-picture">
-
-        <img
-          id="customerImage"
-          src="images/customer.png"
-          alt="お客さん"
-        >
-
-        <div
-          class="customer-fallback"
-          id="customerFallback"
-        >
-          🧑
-        </div>
-
-      </div>
-
-      <div class="customer-speech">
-        これで おねがいします
-      </div>
-
-      <div class="payment-area">
-
-        <div class="payment-label">
-          お客さんが出したお金
-        </div>
-
-        <div
-          class="customer-money-list"
-          id="customerMoneyList"
-        ></div>
-
-        <div class="payment-total">
-          合計
-          <span id="paymentTotal">0</span>円
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- 会計 -->
-
-    <section class="register-panel checkout-panel">
+    <section class="panel checkout-panel">
 
       <div class="panel-heading">
         会計
@@ -1061,6 +1267,7 @@ button:disabled {
 
         <div class="display-row">
           <span>商品代</span>
+
           <strong>
             <span id="displayPrice">0</span>円
           </strong>
@@ -1068,6 +1275,7 @@ button:disabled {
 
         <div class="display-row">
           <span>お預かり</span>
+
           <strong>
             <span id="displayPayment">0</span>円
           </strong>
@@ -1443,7 +1651,6 @@ let previousProductName = "";
 let questionNumber = 1;
 let correctCount = 0;
 
-let currentPrice = 0;
 let paymentAmount = 0;
 let paymentMoney = [];
 let correctChange = 0;
@@ -1585,7 +1792,6 @@ function startRandomProduct() {
 function startCheckout(product) {
   selectedMoney = [];
   locked = false;
-  currentPrice = product.price;
 
   makePayment(product.price);
 
@@ -1866,9 +2072,11 @@ document
       if (correctChange === 0) {
         message.textContent =
           "おつりはありません";
+
       } else if (selectedTotal < correctChange) {
         message.textContent =
           "おつりが足りません";
+
       } else {
         message.textContent =
           "おつりが多すぎます";
