@@ -1,1973 +1,301 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
->
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
 <title>販売学習 ぷちレジ</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-}
-
-html,body{
-  width:100%;
-  min-height:100%;
-  margin:0;
-  font-family:
-    "UD デジタル 教科書体 N-R",
-    "Hiragino Sans",
-    "Yu Gothic",
-    sans-serif;
-  background:#e9f1f5;
-  color:#202020;
-}
-
-body{
-  overflow:hidden;
-}
-
-button{
-  font-family:inherit;
-}
-
-button:active{
-  transform:translateY(3px);
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* ふりがな */
-
-ruby{
-  position:relative;
-  display:inline-block;
-  line-height:1;
-  vertical-align:baseline;
-}
-
-rt{
-  position:absolute;
-  left:50%;
-  bottom:calc(100% + .08em);
-  z-index:20;
-  transform:translateX(-50%);
-  min-width:100%;
-  width:max-content;
-  font-size:.42em;
-  font-weight:700;
-  line-height:1;
-  text-align:center;
-  white-space:nowrap;
-  pointer-events:none;
-}
-
-.screen{
-  width:100%;
-  height:100%;
-}
-
-/* 共通 */
-
-.group-header,
-.group-guide,
-.group-button,
-.register-title,
-.header-badge,
-.panel-heading,
-.payment-label,
-.payment-total,
-.product-name,
-.price-display,
-.display-row,
-.selected-area,
-.money-guide,
-.money-button-label,
-.action-button,
-.message,
-.success-text,
-.next-button,
-.clear-text{
-  overflow:visible;
-}
-
-.panel{
-  min-width:0;
-  min-height:0;
-  padding:10px;
-  border-radius:20px;
-  background:#fff;
-  box-shadow:0 6px 16px rgba(0,0,0,.15);
-}
-
-.panel-heading{
-  min-height:46px;
-  margin-bottom:8px;
-  padding:.55em 8px 5px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:14px;
-  text-align:center;
-  font-size:clamp(19px,2vw,29px);
-  font-weight:900;
-}
-
-/* 班選択 */
-
-#groupScreen{
-  display:flex;
-  flex-direction:column;
-}
-
-.group-header{
-  min-height:76px;
-  padding:.55em 15px 8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#137fbd;
-  color:#fff;
-  border-bottom:5px solid #fff;
-  font-size:clamp(27px,3.2vw,44px);
-  font-weight:900;
-}
-
-.group-main{
-  flex:1;
-  min-height:0;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-}
-
-.group-guide{
-  flex-shrink:0;
-  margin-bottom:18px;
-  padding-top:.55em;
-  text-align:center;
-  font-size:clamp(25px,3vw,40px);
-  font-weight:900;
-}
-
-.group-grid{
-  flex:1;
-  min-height:0;
-  display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:16px;
-}
-
-.group-button{
-  min-width:0;
-  min-height:180px;
-  padding:.65em 8px 10px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border:5px solid #fff;
-  border-radius:24px;
-  box-shadow:0 8px 0 rgba(0,0,0,.2);
-  font-size:clamp(21px,2.4vw,34px);
-  font-weight:900;
-}
-
-.group-button:active{
-  box-shadow:0 3px 0 rgba(0,0,0,.2);
-}
-
-.group-icon{
-  margin-bottom:14px;
-  font-size:clamp(58px,7vw,96px);
-}
-
-.handicraft{background:#ffe0ea;color:#963a5d}
-.gardening{background:#e2f5d8;color:#397328}
-.pottery{background:#f3e5d8;color:#795038}
-.recycle{background:#dcf4eb;color:#257056}
-.craft{background:#dcecff;color:#315f8d}
-
-/* レジ画面 */
-
-#registerScreen{
-  display:flex;
-  flex-direction:column;
-}
 
-.register-header{
-  min-height:60px;
-  position:relative;
-  padding:6px 16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#137fbd;
-  color:#fff;
-  border-bottom:5px solid #fff;
-}
-
-.register-title{
-  padding-top:.5em;
-  font-size:clamp(22px,2.7vw,37px);
-  font-weight:900;
-}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
-.header-badge{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  min-width:132px;
-  padding:.55em 12px 5px;
-  border:3px solid #fff;
-  border-radius:13px;
-  background:#fff;
-  color:#176c9d;
-  text-align:center;
-  font-size:clamp(15px,1.5vw,22px);
-  font-weight:900;
-}
+html,body{width:100%;height:100%;margin:0;font-family:"UD デジタル 教科書体 N-R","Hiragino Sans","Yu Gothic",sans-serif;background:#e9f1f5;color:#202020}
 
-#groupBadge{
-  left:14px;
-}
+body{overflow:hidden}button{font-family:inherit}button:active{transform:translateY(3px)}.hidden{display:none!important}
 
-.progress-badge{
-  right:14px;
-}
+ruby{position:relative;display:inline-block;line-height:1;vertical-align:baseline}
 
-.register-main{
-  flex:1;
-  min-height:0;
-  padding:10px;
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-  gap:10px;
-}
+rt{position:absolute;left:50%;bottom:calc(100% + .08em);z-index:20;transform:translateX(-50%);min-width:100%;width:max-content;font-size:.42em;font-weight:700;line-height:1;text-align:center;white-space:nowrap;pointer-events:none}
 
-/* 左側 */
+.screen{width:100%;height:100%}
 
-.sale-panel,
-.checkout-panel{
-  display:flex;
-  flex-direction:column;
-}
+.group-header,.group-guide,.group-button,.register-title,.header-badge,.panel-heading,.payment-label,.payment-total,.product-name,.price-display,.display-row,.selected-area,.money-guide,.money-button-label,.action-button,.message,.success-text,.next-button,.clear-text{overflow:visible}
 
-.sale-panel .panel-heading{
-  background:#fff0bd;
-  color:#855300;
-}
+.panel{min-width:0;min-height:0;padding:10px;border-radius:20px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.15)}
 
-.checkout-panel .panel-heading{
-  background:#dcf4e5;
-  color:#276f48;
-}
+.panel-heading{min-height:46px;margin-bottom:8px;padding:.55em 8px 5px;display:flex;align-items:center;justify-content:center;border-radius:14px;text-align:center;font-size:clamp(19px,2vw,29px);font-weight:900}
 
-.sale-content{
-  flex:1;
-  min-height:0;
-  display:grid;
-  grid-template-rows:34% 66%;
-  gap:8px;
-}
+#groupScreen{display:flex;flex-direction:column}
 
-.payment-area{
-  min-width:0;
-  min-height:0;
-  padding:8px;
-  display:grid;
-  grid-template-columns:130px minmax(0,1fr) 140px;
-  gap:8px;
-  align-items:center;
-  border:4px solid #70b9e5;
-  border-radius:18px;
-  background:#edf8ff;
-}
+.group-header{min-height:76px;padding:.55em 15px 8px;display:flex;align-items:center;justify-content:center;background:#137fbd;color:#fff;border-bottom:5px solid #fff;font-size:clamp(27px,3.2vw,44px);font-weight:900}
 
-.payment-label{
-  padding-top:.55em;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#286f9b;
-  text-align:center;
-  font-size:clamp(19px,2vw,29px);
-  font-weight:900;
-}
+.group-main{flex:1;min-height:0;padding:20px;display:flex;flex-direction:column}
 
-.payment-money-list{
-  min-width:0;
-  min-height:0;
-  height:100%;
-  padding:5px;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  overflow:hidden;
-  border-radius:14px;
-  background:#fff;
-}
+.group-guide{flex-shrink:0;margin-bottom:18px;padding-top:.55em;text-align:center;font-size:clamp(25px,3vw,40px);font-weight:900}
 
-.payment-total{
-  min-width:0;
-  min-height:72px;
-  padding:.5em 5px 5px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:14px;
-  background:#d5edff;
-  text-align:center;
-  font-size:clamp(27px,3.1vw,44px);
-  font-weight:900;
-}
+.group-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
 
-.product-card{
-  min-width:0;
-  min-height:0;
-  padding:8px;
-  display:grid;
-  grid-template-columns:minmax(0,46%) minmax(0,31%) minmax(105px,23%);
-  gap:8px;
-  border:4px solid #efbf55;
-  border-radius:18px;
-  background:#fffaf0;
-}
+.group-button{min-width:0;min-height:180px;padding:.65em 8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:5px solid #fff;border-radius:24px;box-shadow:0 8px 0 rgba(0,0,0,.2);font-size:clamp(21px,2.4vw,34px);font-weight:900}
 
-.product-image-box{
-  min-width:0;
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  border:3px solid #f0e3c8;
-  border-radius:14px;
-  background:#fff;
-}
+.group-button:active{box-shadow:0 3px 0 rgba(0,0,0,.2)}.group-icon{margin-bottom:14px;font-size:clamp(58px,7vw,96px)}
 
-.product-image-box img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-}
+.handicraft{background:#ffe0ea;color:#963a5d}.gardening{background:#e2f5d8;color:#397328}.pottery{background:#f3e5d8;color:#795038}.recycle{background:#dcf4eb;color:#257056}.craft{background:#dcecff;color:#315f8d}
 
-.product-fallback{
-  display:none;
-  padding:10px;
-  text-align:center;
-  line-height:1.4;
-  font-size:clamp(18px,1.8vw,27px);
-  font-weight:900;
-}
+#registerScreen{display:flex;flex-direction:column}
 
-.product-name{
-  min-width:0;
-  min-height:0;
-  padding:.65em 6px 6px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  line-height:1.4;
-  overflow-wrap:anywhere;
-  font-size:clamp(18px,1.9vw,28px);
-  font-weight:900;
-}
+.register-header{min-height:60px;position:relative;padding:6px 16px;display:flex;align-items:center;justify-content:center;background:#137fbd;color:#fff;border-bottom:5px solid #fff}
 
-.price-display{
-  min-width:0;
-  min-height:0;
-  padding:.65em 6px 6px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  border-radius:14px;
-  background:#ffea91;
-  text-align:center;
-}
+.register-title{padding-top:.5em;font-size:clamp(22px,2.7vw,37px);font-weight:900}
 
-.price-label{
-  color:#805000;
-  font-size:clamp(14px,1.4vw,21px);
-  font-weight:900;
-}
+.header-badge{position:absolute;top:50%;transform:translateY(-50%);min-width:132px;padding:.55em 12px 5px;border:3px solid #fff;border-radius:13px;background:#fff;color:#176c9d;text-align:center;font-size:clamp(15px,1.5vw,22px);font-weight:900}
 
-.price-value{
-  font-size:clamp(31px,3.7vw,52px);
-  font-weight:900;
-}
+#groupBadge{left:14px}.progress-badge{right:14px}
 
-/* 右側 */
-
-.display-screen{
-  flex-shrink:0;
-  padding:5px 10px;
-  border:4px solid #3c5360;
-  border-radius:14px;
-  background:#e8f6ed;
-  box-shadow:inset 0 0 0 3px #bad7c3;
-}
+.register-main{flex:1;min-height:0;padding:10px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:10px}
 
-.display-row{
-  min-height:43px;
-  padding-top:.5em;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:2px solid #9db7a6;
-  font-size:clamp(17px,1.7vw,25px);
-  font-weight:900;
-}
+.sale-panel,.checkout-panel{display:flex;flex-direction:column}.sale-panel .panel-heading{background:#fff0bd;color:#855300}.checkout-panel .panel-heading{background:#dcf4e5;color:#276f48}
 
-.display-row:last-child{
-  border-bottom:none;
-}
+.sale-content{flex:1;min-height:0;display:grid;grid-template-rows:34% 66%;gap:8px}
 
-.display-row strong{
-  white-space:nowrap;
-  font-size:clamp(24px,2.8vw,40px);
-}
+.payment-area{min-width:0;min-height:0;padding:8px;display:grid;grid-template-columns:130px minmax(0,1fr) 140px;gap:8px;align-items:center;border:4px solid #70b9e5;border-radius:18px;background:#edf8ff}
 
-.change-question{
-  color:#c44f1e;
-}
+.payment-label{padding-top:.55em;display:flex;align-items:center;justify-content:center;color:#286f9b;text-align:center;font-size:clamp(19px,2vw,29px);font-weight:900}
 
-.selected-area{
-  flex-shrink:0;
-  margin-top:7px;
-  padding:.55em 6px 5px;
-  border-radius:14px;
-  background:#e7f4ff;
-  text-align:center;
-}
+.payment-money-list{min-width:0;min-height:0;height:100%;padding:5px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;overflow:hidden;border-radius:14px;background:#fff}
 
-.selected-label{
-  color:#2e6991;
-  font-size:clamp(14px,1.4vw,21px);
-  font-weight:900;
-}
+.payment-total{min-width:0;min-height:72px;padding:.5em 5px 5px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:#d5edff;text-align:center;font-size:clamp(27px,3.1vw,44px);font-weight:900}
 
-.selected-value{
-  font-size:clamp(28px,3.2vw,45px);
-  font-weight:900;
-}
+.product-card{min-width:0;min-height:0;padding:8px;display:grid;grid-template-columns:minmax(0,46%) minmax(0,31%) minmax(105px,23%);gap:8px;border:4px solid #efbf55;border-radius:18px;background:#fffaf0}
 
-.selected-money-box{
-  min-height:48px;
-  max-height:56px;
-  margin-top:5px;
-  padding:3px;
-  display:flex;
-  flex-wrap:nowrap;
-  align-items:center;
-  justify-content:flex-start;
-  gap:3px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  border:3px solid #96c2df;
-  border-radius:12px;
-  background:#fff;
-  -webkit-overflow-scrolling:touch;
-}
+.product-image-box{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border:3px solid #f0e3c8;border-radius:14px;background:#fff}
 
-.money-guide{
-  flex-shrink:0;
-  margin:6px 0 4px;
-  padding-top:.45em;
-  text-align:center;
-  font-size:clamp(15px,1.5vw,22px);
-  font-weight:900;
-}
+.product-image-box img{width:100%;height:100%;object-fit:contain}.product-fallback{display:none;padding:10px;text-align:center;line-height:1.4;font-size:clamp(18px,1.8vw,27px);font-weight:900}
 
-.money-buttons{
-  flex:1;
-  min-height:0;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:7px;
-  align-content:center;
-}
+.product-name{min-width:0;min-height:0;padding:.65em 6px 6px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.4;overflow-wrap:anywhere;font-size:clamp(18px,1.9vw,28px);font-weight:900}
 
-.money-button{
-  min-width:0;
-  min-height:90px;
-  position:relative;
-  padding:5px;
-  border:3px solid #7899ac;
-  border-radius:15px;
-  background:#f5f9fb;
-  box-shadow:0 5px 0 #587788;
-}
+.price-display{min-width:0;min-height:0;padding:.65em 6px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;background:#ffea91;text-align:center}
 
-.money-button:active{
-  box-shadow:0 2px 0 #587788;
-}
+.price-label{color:#805000;font-size:clamp(14px,1.4vw,21px);font-weight:900}.price-value{font-size:clamp(31px,3.7vw,52px);font-weight:900}
 
-.money-button img{
-  width:100%;
-  height:48px;
-  object-fit:contain;
-}
+.display-screen{flex-shrink:0;padding:5px 10px;border:4px solid #3c5360;border-radius:14px;background:#e8f6ed;box-shadow:inset 0 0 0 3px #bad7c3}
 
-.money-button-label{
-  padding-top:.35em;
-  white-space:nowrap;
-  font-size:clamp(15px,1.5vw,22px);
-  font-weight:900;
-}
+.display-row{min-height:43px;padding-top:.5em;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #9db7a6;font-size:clamp(17px,1.7vw,25px);font-weight:900}
 
-.money-count{
-  position:absolute;
-  top:-7px;
-  right:-5px;
-  min-width:32px;
-  height:32px;
-  padding:2px 6px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:3px solid #fff;
-  border-radius:18px;
-  background:#ed536a;
-  color:#fff;
-  font-size:16px;
-  font-weight:900;
-}
+.display-row:last-child{border-bottom:none}.display-row strong{white-space:nowrap;font-size:clamp(24px,2.8vw,40px)}.change-question{color:#c44f1e}
 
-.action-row{
-  flex-shrink:0;
-  margin-top:7px;
-  display:grid;
-  grid-template-columns:.9fr 1.1fr 1.35fr;
-  gap:7px;
-}
+.selected-area{flex-shrink:0;margin-top:7px;padding:.55em 6px 5px;border-radius:14px;background:#e7f4ff;text-align:center}
 
-.action-button{
-  min-height:54px;
-  padding:.55em 5px 5px;
-  border:none;
-  border-radius:14px;
-  font-size:clamp(16px,1.6vw,23px);
-  font-weight:900;
-  box-shadow:0 5px 0 rgba(0,0,0,.24);
-}
+.selected-label{color:#2e6991;font-size:clamp(14px,1.4vw,21px);font-weight:900}.selected-value{font-size:clamp(28px,3.2vw,45px);font-weight:900}
 
-.action-button:active{
-  box-shadow:0 2px 0 rgba(0,0,0,.24);
-}
+.selected-money-box{min-height:48px;max-height:56px;margin-top:5px;padding:3px;display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:3px;overflow-x:auto;overflow-y:hidden;border:3px solid #96c2df;border-radius:12px;background:#fff;-webkit-overflow-scrolling:touch}
 
-.reset-button{
-  background:#e2e2e2;
-  color:#3e3e3e;
-}
+.money-guide{flex-shrink:0;margin:6px 0 4px;padding-top:.45em;text-align:center;font-size:clamp(15px,1.5vw,22px);font-weight:900}
 
-.no-change-button{
-  background:#62b97b;
-  color:#fff;
-}
+.money-buttons{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-content:center}
 
-.checkout-button{
-  background:#ef694b;
-  color:#fff;
-}
+.money-button{min-width:0;min-height:86px;position:relative;padding:4px;border:3px solid #7899ac;border-radius:15px;background:#f5f9fb;box-shadow:0 5px 0 #587788}
 
-.message{
-  flex-shrink:0;
-  min-height:42px;
-  margin-top:6px;
-  padding:.55em 8px 5px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:13px;
-  background:#fff1b8;
-  text-align:center;
-  font-size:clamp(14px,1.4vw,21px);
-  font-weight:900;
-}
+.money-button:active{box-shadow:0 2px 0 #587788}.money-button img{width:100%;height:44px;object-fit:contain}.money-button-label{padding-top:.35em;white-space:nowrap;font-size:clamp(14px,1.35vw,20px);font-weight:900}
 
-/* お金画像 */
-
-.money-picture{
-  width:62px;
-  height:46px;
-  flex:0 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+.money-count{position:absolute;top:-7px;right:-5px;min-width:32px;height:32px;padding:2px 6px;display:flex;align-items:center;justify-content:center;border:3px solid #fff;border-radius:18px;background:#ed536a;color:#fff;font-size:16px;font-weight:900}
 
-.money-picture.bill{
-  width:104px;
-  height:50px;
-}
+.action-row{flex-shrink:0;margin-top:7px;display:grid;grid-template-columns:.9fr 1.1fr 1.35fr;gap:7px}
 
-.money-picture img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-  filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));
-}
+.action-button{min-height:54px;padding:.55em 5px 5px;border:none;border-radius:14px;font-size:clamp(16px,1.6vw,23px);font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.24)}
 
-.money-fallback{
-  display:none;
-  padding:6px 8px;
-  border:3px solid #8e6900;
-  border-radius:50%;
-  background:#e9c242;
-  font-size:14px;
-  font-weight:900;
-}
+.action-button:active{box-shadow:0 2px 0 rgba(0,0,0,.24)}.reset-button{background:#e2e2e2;color:#3e3e3e}.no-change-button{background:#62b97b;color:#fff}.checkout-button{background:#ef694b;color:#fff}
 
-.money-picture.bill .money-fallback{
-  border-radius:7px;
-  border-color:#397b55;
-  background:#bae0c7;
-}
+.message{flex-shrink:0;min-height:42px;margin-top:6px;padding:.55em 8px 5px;display:flex;align-items:center;justify-content:center;border-radius:13px;background:#fff1b8;text-align:center;font-size:clamp(14px,1.4vw,21px);font-weight:900}
 
-.selected-money-box .money-picture{
-  width:43px;
-  height:32px;
-}
+.message:empty{background:transparent;min-height:0;margin-top:0;padding:0}
 
-.selected-money-box .money-picture.bill{
-  width:72px;
-  height:35px;
-}
+.money-picture{width:62px;height:46px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}.money-picture.bill{width:104px;height:50px}.money-picture img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
 
-.selected-money-box .money-fallback{
-  padding:3px 5px;
-  font-size:10px;
-}
+.money-fallback{display:none;padding:6px 8px;border:3px solid #8e6900;border-radius:50%;background:#e9c242;font-size:14px;font-weight:900}.money-picture.bill .money-fallback{border-radius:7px;border-color:#397b55;background:#bae0c7}
 
-/* 判定 */
-
-.judge-layer{
-  position:fixed;
-  inset:0;
-  z-index:50;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-}
+.selected-money-box .money-picture{width:43px;height:32px}.selected-money-box .money-picture.bill{width:72px;height:35px}.selected-money-box .money-fallback{padding:3px 5px;font-size:10px}
 
-.judge-layer.show{
-  display:flex;
-}
+.judge-layer{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;pointer-events:none}.judge-layer.show{display:flex}
 
-.correct-mark{
-  width:min(31vw,270px);
-  height:min(31vw,270px);
-  border:26px solid #ef3340;
-  border-radius:50%;
-  filter:drop-shadow(0 8px 7px rgba(0,0,0,.25));
-}
+.correct-mark{width:min(31vw,270px);height:min(31vw,270px);border:26px solid #ef3340;border-radius:50%;filter:drop-shadow(0 8px 7px rgba(0,0,0,.25))}
 
-.wrong-mark{
-  width:min(31vw,270px);
-  height:min(31vw,270px);
-  position:relative;
-  filter:drop-shadow(0 8px 7px rgba(0,0,0,.25));
-}
+.wrong-mark{width:min(31vw,270px);height:min(31vw,270px);position:relative;filter:drop-shadow(0 8px 7px rgba(0,0,0,.25))}
 
-.wrong-mark::before,
-.wrong-mark::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:43%;
-  width:14%;
-  height:100%;
-  border-radius:18px;
-  background:#1973ef;
-}
+.wrong-mark::before,.wrong-mark::after{content:"";position:absolute;top:0;left:43%;width:14%;height:100%;border-radius:18px;background:#1973ef}.wrong-mark::before{transform:rotate(45deg)}.wrong-mark::after{transform:rotate(-45deg)}
 
-.wrong-mark::before{
-  transform:rotate(45deg);
-}
+.success-layer,.clear-layer{position:fixed;inset:0;display:none;align-items:center;justify-content:center}.success-layer{z-index:60;background:rgba(0,0,0,.43)}.clear-layer{z-index:80;background:radial-gradient(circle,#fff38c 0 8%,transparent 9%),radial-gradient(circle,#ffaec2 0 7%,transparent 8%),#cceeff;background-size:100px 100px,140px 140px}
 
-.wrong-mark::after{
-  transform:rotate(-45deg);
-}
+.success-layer.show,.clear-layer.show{display:flex}.success-card,.clear-card{background:#fff;text-align:center;box-shadow:0 15px 32px rgba(0,0,0,.29)}.success-card{width:min(74vw,620px);padding:30px;border:7px solid #137fbd;border-radius:28px}.clear-card{width:min(86vw,780px);padding:36px;border:8px solid #137fbd;border-radius:33px}
 
-/* 正解・クリア画面 */
-
-.success-layer,
-.clear-layer{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
+.success-title{color:#e64966;font-size:clamp(39px,5vw,64px);font-weight:900}.success-text{margin:18px 0 23px;padding-top:.45em;font-size:clamp(22px,2.6vw,35px);font-weight:900}
 
-.success-layer{
-  z-index:60;
-  background:rgba(0,0,0,.43);
-}
+.next-button,.restart-button{min-width:270px;min-height:68px;padding:.55em 15px 7px;border:none;border-radius:17px;font-size:clamp(21px,2.2vw,30px);font-weight:900}.next-button{background:#137fbd;color:#fff;box-shadow:0 6px 0 #0b5987}
 
-.clear-layer{
-  z-index:80;
-  background:
-    radial-gradient(circle,#fff38c 0 8%,transparent 9%),
-    radial-gradient(circle,#ffaec2 0 7%,transparent 8%),
-    #cceeff;
-  background-size:100px 100px,140px 140px;
-}
+.clear-icons{font-size:clamp(52px,7vw,90px)}.clear-title{color:#ef4966;font-size:clamp(48px,7vw,86px);font-weight:900}.clear-text{margin:20px 0 27px;padding-top:.45em;font-size:clamp(24px,3vw,39px);font-weight:900;line-height:1.6}.restart-button{background:#ffd75b;color:#333;box-shadow:0 6px 0 #c39b22}
 
-.success-layer.show,
-.clear-layer.show{
-  display:flex;
-}
+@media (orientation:portrait){
 
-.success-card,
-.clear-card{
-  background:#fff;
-  text-align:center;
-  box-shadow:0 15px 32px rgba(0,0,0,.29);
-}
+ body{overflow:auto}.screen{min-height:100dvh;height:auto}.group-header{min-height:82px}.group-main{padding:18px 14px 26px}.group-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.group-button{min-height:155px}.group-button:last-child{grid-column:1/-1}
 
-.success-card{
-  width:min(74vw,620px);
-  padding:30px;
-  border:7px solid #137fbd;
-  border-radius:28px;
-}
+ .register-header{min-height:100px;padding:48px 8px 8px}.register-title{font-size:clamp(20px,5vw,31px)}.header-badge{top:9px;transform:none;min-width:120px;font-size:15px}#groupBadge{left:9px}.progress-badge{right:9px}
 
-.clear-card{
-  width:min(86vw,780px);
-  padding:36px;
-  border:8px solid #137fbd;
-  border-radius:33px;
-}
+ .register-main{padding:9px;display:flex;flex-direction:column;gap:10px}.panel{width:100%}.sale-content{display:flex;flex-direction:column;gap:8px}.payment-area{min-height:150px;grid-template-columns:100px minmax(0,1fr) 105px;gap:6px}
 
-.success-title{
-  color:#e64966;
-  font-size:clamp(39px,5vw,64px);
-  font-weight:900;
-}
+ .payment-label{font-size:clamp(17px,4.5vw,24px)}.payment-total{min-height:65px;font-size:clamp(24px,7vw,36px)}.product-card{min-height:260px;grid-template-columns:minmax(0,45%) minmax(0,32%) minmax(90px,23%);gap:6px}
 
-.success-text{
-  margin:18px 0 23px;
-  padding-top:.45em;
-  font-size:clamp(22px,2.6vw,35px);
-  font-weight:900;
-}
+ .checkout-panel{min-height:720px}.display-row{min-height:52px;font-size:clamp(17px,4.2vw,23px)}.display-row strong{font-size:clamp(24px,6vw,35px)}.selected-money-box{min-height:52px;max-height:62px}
 
-.next-button,
-.restart-button{
-  min-width:270px;
-  min-height:68px;
-  padding:.55em 15px 7px;
-  border:none;
-  border-radius:17px;
-  font-size:clamp(21px,2.2vw,30px);
-  font-weight:900;
-}
+ .money-buttons{min-height:300px;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.money-button{min-height:105px}.money-button img{height:55px}.action-row{grid-template-columns:1fr 1fr}.checkout-button{grid-column:1/-1}.action-button{min-height:58px;font-size:clamp(16px,4vw,22px)}.message{min-height:58px;font-size:clamp(15px,3.8vw,21px)}
 
-.next-button{
-  background:#137fbd;
-  color:#fff;
-  box-shadow:0 6px 0 #0b5987;
-}
+ .success-card,.clear-card{width:90vw;padding:25px 18px}
 
-.clear-icons{
-  font-size:clamp(52px,7vw,90px);
 }
 
-.clear-title{
-  color:#ef4966;
-  font-size:clamp(48px,7vw,86px);
-  font-weight:900;
-}
+@media (orientation:landscape) and (max-height:650px){
 
-.clear-text{
-  margin:20px 0 27px;
-  padding-top:.45em;
-  font-size:clamp(24px,3vw,39px);
-  font-weight:900;
-  line-height:1.6;
-}
+ .register-header{min-height:48px}.register-main{padding:5px;gap:5px}.panel{padding:5px}.panel-heading{min-height:34px;margin-bottom:4px}.sale-content{gap:4px}.payment-area{padding:4px;grid-template-columns:100px 1fr 112px}.payment-total{min-height:48px}
 
-.restart-button{
-  background:#ffd75b;
-  color:#333;
-  box-shadow:0 6px 0 #c39b22;
-}
+ .product-card{padding:4px;gap:4px}.display-row{min-height:33px}.selected-area{margin-top:3px}.selected-money-box{min-height:34px;max-height:38px}.money-guide{margin:3px 0 2px}.money-button{min-height:64px}.money-button img{height:29px}.action-row{margin-top:4px}.action-button{min-height:43px}.message{min-height:32px;margin-top:3px}
 
-/* 縦画面 */
-
-@media screen and (orientation:portrait){
-  body{
-    overflow:auto;
-  }
-
-  .screen{
-    min-height:100dvh;
-    height:auto;
-  }
-
-  .group-header{
-    min-height:82px;
-  }
-
-  .group-main{
-    padding:18px 14px 26px;
-  }
-
-  .group-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:14px;
-  }
-
-  .group-button{
-    min-height:155px;
-  }
-
-  .group-button:last-child{
-    grid-column:1 / -1;
-  }
-
-  .register-header{
-    min-height:100px;
-    padding:48px 8px 8px;
-  }
-
-  .register-title{
-    font-size:clamp(20px,5vw,31px);
-  }
-
-  .header-badge{
-    top:9px;
-    transform:none;
-    min-width:120px;
-    font-size:15px;
-  }
-
-  #groupBadge{
-    left:9px;
-  }
-
-  .progress-badge{
-    right:9px;
-  }
-
-  .register-main{
-    padding:9px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .panel{
-    width:100%;
-  }
-
-  .sale-content{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-
-  .payment-area{
-    min-height:150px;
-    grid-template-columns:100px minmax(0,1fr) 105px;
-    gap:6px;
-  }
-
-  .payment-label{
-    font-size:clamp(17px,4.5vw,24px);
-  }
-
-  .payment-total{
-    min-height:65px;
-    font-size:clamp(24px,7vw,36px);
-  }
-
-  .product-card{
-    min-height:260px;
-    grid-template-columns:minmax(0,45%) minmax(0,32%) minmax(90px,23%);
-    gap:6px;
-  }
-
-  .product-name{
-    font-size:clamp(16px,4.2vw,24px);
-  }
-
-  .price-value{
-    font-size:clamp(27px,7vw,42px);
-  }
-
-  .checkout-panel{
-    min-height:650px;
-  }
-
-  .display-row{
-    min-height:52px;
-    font-size:clamp(17px,4.2vw,23px);
-  }
-
-  .display-row strong{
-    font-size:clamp(24px,6vw,35px);
-  }
-
-  .selected-money-box{
-    min-height:52px;
-    max-height:62px;
-  }
-
-  .money-buttons{
-    min-height:230px;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:9px;
-  }
-
-  .money-button{
-    min-height:105px;
-  }
-
-  .money-button img{
-    height:55px;
-  }
-
-  .action-row{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .checkout-button{
-    grid-column:1 / -1;
-  }
-
-  .action-button{
-    min-height:58px;
-    font-size:clamp(16px,4vw,22px);
-  }
-
-  .message{
-    min-height:58px;
-    font-size:clamp(15px,3.8vw,21px);
-  }
-
-  .success-card,
-  .clear-card{
-    width:90vw;
-    padding:25px 18px;
-  }
 }
 
-/* 高さが低い横画面 */
-
-@media screen and (orientation:landscape) and (max-height:650px){
-  .register-header{
-    min-height:48px;
-  }
-
-  .register-main{
-    padding:5px;
-    gap:5px;
-  }
-
-  .panel{
-    padding:5px;
-  }
-
-  .panel-heading{
-    min-height:34px;
-    margin-bottom:4px;
-  }
-
-  .sale-content{
-    gap:4px;
-  }
-
-  .payment-area{
-    padding:4px;
-    grid-template-columns:100px 1fr 112px;
-  }
-
-  .payment-total{
-    min-height:48px;
-  }
-
-  .product-card{
-    padding:4px;
-    gap:4px;
-  }
-
-  .display-row{
-    min-height:33px;
-  }
-
-  .selected-area{
-    margin-top:3px;
-  }
-
-  .selected-money-box{
-    min-height:34px;
-    max-height:38px;
-  }
-
-  .money-guide{
-    margin:3px 0 2px;
-  }
-
-  .money-button{
-    min-height:66px;
-  }
-
-  .money-button img{
-    height:31px;
-  }
-
-  .action-row{
-    margin-top:4px;
-  }
-
-  .action-button{
-    min-height:43px;
-  }
-
-  .message{
-    min-height:32px;
-    margin-top:3px;
-  }
-}
 </style>
+
 </head>
 
 <body>
 
 <section id="groupScreen" class="screen">
 
-  <header class="group-header">
-    <ruby>販売<rt>はんばい</rt></ruby>
-    <ruby>学習<rt>がくしゅう</rt></ruby>　
-    ぷちレジ
-  </header>
+<header class="group-header"><ruby>販売<rt>はんばい</rt></ruby><ruby>学習<rt>がくしゅう</rt></ruby>　ぷちレジ</header>
 
-  <main class="group-main">
-
-    <div class="group-guide">
-      <ruby>自分<rt>じぶん</rt></ruby>の
-      <ruby>班<rt>はん</rt></ruby>を
-      <ruby>選<rt>えら</rt></ruby>んでください
-    </div>
-
-    <div class="group-grid" id="groupGrid"></div>
-
-  </main>
+<main class="group-main"><div class="group-guide"><ruby>自分<rt>じぶん</rt></ruby>の<ruby>班<rt>はん</rt></ruby>を<ruby>選<rt>えら</rt></ruby>んでください</div><div class="group-grid" id="groupGrid"></div></main>
 
 </section>
 
 <section id="registerScreen" class="screen hidden">
 
-  <header class="register-header">
+<header class="register-header"><div class="header-badge" id="groupBadge"></div><div class="register-title"><ruby>販売<rt>はんばい</rt></ruby><ruby>学習<rt>がくしゅう</rt></ruby>　ぷちレジ</div><div class="header-badge progress-badge"><span id="questionNumber">1</span> / 10もん</div></header>
 
-    <div class="header-badge" id="groupBadge"></div>
+<main class="register-main">
 
-    <div class="register-title">
-      <ruby>販売<rt>はんばい</rt></ruby>
-      <ruby>学習<rt>がくしゅう</rt></ruby>　
-      ぷちレジ
-    </div>
+<section class="panel sale-panel">
 
-    <div class="header-badge progress-badge">
-      <span id="questionNumber">1</span> / 10もん
-    </div>
+<div class="panel-heading"><ruby>預<rt>あず</rt></ruby>かった お<ruby>金<rt>かね</rt></ruby>と <ruby>商品<rt>しょうひん</rt></ruby></div>
 
-  </header>
+<div class="sale-content">
 
-  <main class="register-main">
+<div class="payment-area"><div class="payment-label">お<ruby>預<rt>あず</rt></ruby>かり</div><div class="payment-money-list" id="paymentMoneyList"></div><div class="payment-total"><span id="paymentTotal">0</span><ruby>円<rt>えん</rt></ruby></div></div>
 
-    <section class="panel sale-panel">
+<div class="product-card"><div class="product-image-box"><img id="productImage" src="" alt=""><div class="product-fallback" id="productFallback"></div></div><div class="product-name" id="productName"></div><div class="price-display"><div class="price-label"><ruby>商品代<rt>しょうひんだい</rt></ruby></div><div class="price-value"><span id="priceValue">0</span><ruby>円<rt>えん</rt></ruby></div></div></div>
 
-      <div class="panel-heading">
-        <ruby>預<rt>あず</rt></ruby>かった
-        お<ruby>金<rt>かね</rt></ruby>と
-        <ruby>商品<rt>しょうひん</rt></ruby>
-      </div>
+</div></section>
 
-      <div class="sale-content">
+<section class="panel checkout-panel">
 
-        <div class="payment-area">
+<div class="panel-heading"><ruby>会計<rt>かいけい</rt></ruby></div>
 
-          <div class="payment-label">
-            お<ruby>預<rt>あず</rt></ruby>かり
-          </div>
+<div class="display-screen">
 
-          <div
-            class="payment-money-list"
-            id="paymentMoneyList"
-          ></div>
+<div class="display-row"><span>お<ruby>預<rt>あず</rt></ruby>かり</span><strong><span id="displayPayment">0</span><ruby>円<rt>えん</rt></ruby></strong></div>
 
-          <div class="payment-total">
-            <span id="paymentTotal">0</span>
-            <ruby>円<rt>えん</rt></ruby>
-          </div>
+<div class="display-row"><span><ruby>商品代<rt>しょうひんだい</rt></ruby></span><strong><span id="displayPrice">0</span><ruby>円<rt>えん</rt></ruby></strong></div>
 
-        </div>
-
-        <div class="product-card">
-
-          <div class="product-image-box">
-
-            <img id="productImage" src="" alt="">
-
-            <div
-              class="product-fallback"
-              id="productFallback"
-            ></div>
-
-          </div>
-
-          <div
-            class="product-name"
-            id="productName"
-          ></div>
-
-          <div class="price-display">
-
-            <div class="price-label">
-              <ruby>商品代<rt>しょうひんだい</rt></ruby>
-            </div>
-
-            <div class="price-value">
-              <span id="priceValue">0</span>
-              <ruby>円<rt>えん</rt></ruby>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="panel checkout-panel">
-
-      <div class="panel-heading">
-        <ruby>会計<rt>かいけい</rt></ruby>
-      </div>
-
-      <div class="display-screen">
-
-        <div class="display-row">
-          <span>
-            お<ruby>預<rt>あず</rt></ruby>かり
-          </span>
-
-          <strong>
-            <span id="displayPayment">0</span>
-            <ruby>円<rt>えん</rt></ruby>
-          </strong>
-        </div>
-
-        <div class="display-row">
-          <span>
-            <ruby>商品代<rt>しょうひんだい</rt></ruby>
-          </span>
-
-          <strong>
-            <span id="displayPrice">0</span>
-            <ruby>円<rt>えん</rt></ruby>
-          </strong>
-        </div>
-
-        <div class="display-row change-question">
-          <span>おつり</span>
-
-          <strong>
-            <span id="displayChange">0</span>
-            <ruby>円<rt>えん</rt></ruby>
-          </strong>
-        </div>
-
-      </div>
-
-      <div class="selected-area">
-
-        <div class="selected-label">
-          <ruby>渡<rt>わた</rt></ruby>す
-          <ruby>金額<rt>きんがく</rt></ruby>
-        </div>
-
-        <div class="selected-value">
-          <span id="selectedTotal">0</span>
-          <ruby>円<rt>えん</rt></ruby>
-        </div>
-
-        <div
-          class="selected-money-box"
-          id="selectedMoneyBox"
-        ></div>
-
-      </div>
-
-      <div class="money-guide">
-        おつりのお<ruby>金<rt>かね</rt></ruby>を
-        <ruby>選<rt>えら</rt></ruby>んでください
-      </div>
-
-      <div class="money-buttons" id="moneyButtons"></div>
-
-      <div class="action-row">
-
-        <button
-          class="action-button reset-button"
-          id="resetButton"
-        >
-          ひとつ
-          <ruby>戻<rt>もど</rt></ruby>す
-        </button>
-
-        <button
-          class="action-button no-change-button"
-          id="noChangeButton"
-        >
-          おつりなし
-        </button>
-
-        <button
-          class="action-button checkout-button"
-          id="checkoutButton"
-        >
-          <ruby>会計<rt>かいけい</rt></ruby>する
-        </button>
-
-      </div>
-
-      <div class="message" id="message"></div>
-
-    </section>
-
-  </main>
-
-</section>
-
-<div class="judge-layer" id="judgeLayer">
-  <div id="judgeMark"></div>
-</div>
-
-<div class="success-layer" id="successLayer">
-
-  <div class="success-card">
-
-    <div class="success-title">
-      せいかい！
-    </div>
-
-    <div class="success-text" id="successText"></div>
-
-    <button class="next-button" id="nextButton">
-      つぎの
-      お<ruby>客<rt>きゃく</rt></ruby>さん
-    </button>
-
-  </div>
+<div class="display-row change-question"><span>おつり</span><strong><span id="displayChange">0</span><ruby>円<rt>えん</rt></ruby></strong></div>
 
 </div>
 
-<div class="clear-layer" id="clearLayer">
+<div class="selected-area"><div class="selected-label"><ruby>渡<rt>わた</rt></ruby>す <ruby>金額<rt>きんがく</rt></ruby></div><div class="selected-value"><span id="selectedTotal">0</span><ruby>円<rt>えん</rt></ruby></div><div class="selected-money-box" id="selectedMoneyBox"></div></div>
 
-  <div class="clear-card">
+<div class="money-guide">おつりのお<ruby>金<rt>かね</rt></ruby>を<ruby>選<rt>えら</rt></ruby>んでください</div>
 
-    <div class="clear-icons">
-      🎉✨🏪✨🎉
-    </div>
+<div class="money-buttons" id="moneyButtons"></div>
 
-    <div class="clear-title">
-      おめでとう
+<div class="action-row"><button class="action-button reset-button" id="resetButton">ひとつ<ruby>戻<rt>もど</rt></ruby>す</button><button class="action-button no-change-button" id="noChangeButton">おつりなし</button><button class="action-button checkout-button" id="checkoutButton"><ruby>会計<rt>かいけい</rt></ruby>する</button></div>
 
-    <div class="clear-text">
-      10もん せいかいしました！<br>
-      レジのお<ruby>仕事<rt>しごと</rt></ruby>
-      ばっちりです！
-    </div>
+<div class="message" id="message"></div>
 
-    <button class="restart-button" id="restartButton">
-      もういちど
-    </button>
+</section></main></section>
 
-  </div>
+<div class="judge-layer" id="judgeLayer"><div id="judgeMark"></div></div>
 
-</div>
+<div class="success-layer" id="successLayer"><div class="success-card"><div class="success-title">せいかい！</div><div class="success-text" id="successText"></div><button class="next-button" id="nextButton">つぎのお<ruby>客<rt>きゃく</rt></ruby>さん</button></div></div>
+
+<div class="clear-layer" id="clearLayer"><div class="clear-card"><div class="clear-icons">🎉✨🏪✨🎉</div><div class="clear-title">おめでとう！</div><div class="clear-text">10もん せいかいしました！<br>レジのお<ruby>仕事<rt>しごと</rt></ruby> ばっちりです！</div><button class="restart-button" id="restartButton">もういちど</button></div></div>
 
 <script>
 
-  const groups = [
-  {
-    id: "手工芸",
-    className: "handicraft",
-    icon: "🧵",
-    label: "<ruby>手工芸<rt>しゅこうげい</rt></ruby>"
-  },
-  {
-    id: "園芸",
-    className: "gardening",
-    icon: "🌱",
-    label: "<ruby>園芸<rt>えんげい</rt></ruby>"
-  },
-  {
-    id: "陶工",
-    className: "pottery",
-    icon: "🏺",
-    label: "<ruby>陶工<rt>とうこう</rt></ruby>"
-  },
-  {
-    id: "リサイクル",
-    className: "recycle",
-    icon: "♻️",
-    label: "リサイクル"
-  },
-  {
-    id: "工芸",
-    className: "craft",
-    icon: "🧺",
-    label: "<ruby>工芸<rt>こうげい</rt></ruby>"
-  }
-];
-
-const products = [
-  ["手工芸","ティッシュケース","ティッシュケース",200,"tissue_case.jpg"],
-  ["手工芸","ポーチ 小","ポーチ <ruby>小<rt>しょう</rt></ruby>",600,"pouch_small.jpg"],
-  ["手工芸","ポーチ 大","ポーチ <ruby>大<rt>だい</rt></ruby>",1000,"pouch_large.jpg"],
-  ["手工芸","バンド","バンド",100,"band.jpg"],
-  ["手工芸","マグネット 2個セット","マグネット 2<ruby>個<rt>こ</rt></ruby>セット",100,"magnet_set.jpg"],
-  ["手工芸","ヘアゴム 2個セット","ヘアゴム 2<ruby>個<rt>こ</rt></ruby>セット",100,"hair_gum_set.jpg"],
-  ["手工芸","マルチマット","マルチマット",1000,"multi_mat.jpg"],
-  ["手工芸","コースター ①","コースター ①",100,"coaster_1.jpg"],
-  ["手工芸","コースター ②","コースター ②",100,"coaster_2.jpg"],
-  ["手工芸","巾着袋","<ruby>巾着袋<rt>きんちゃくぶくろ</rt></ruby>",400,"drawstring_bag.jpg"],
-  ["手工芸","エコバッグ","エコバッグ",300,"eco_bag.jpg"],
-
-  ["園芸","唐辛子","<ruby>唐辛子<rt>とうがらし</rt></ruby>",50,"chili_pepper.jpg"],
-  ["園芸","100円野菜","100<ruby>円<rt>えん</rt></ruby><ruby>野菜<rt>やさい</rt></ruby>",100,"vegetables.jpg"],
-  ["園芸","花苗 2個セット","<ruby>花苗<rt>はななえ</rt></ruby> 2<ruby>個<rt>こ</rt></ruby>セット",100,"flower_seedling_set.jpg"],
-  ["園芸","100円雑貨","100<ruby>円<rt>えん</rt></ruby><ruby>雑貨<rt>ざっか</rt></ruby>",100,"gardening_goods.jpg"],
-
-  ["陶工","お皿","お<ruby>皿<rt>さら</rt></ruby>",100,"plate.jpg"],
-
-  ["リサイクル","メッセージカード 2個セット","メッセージカード 2<ruby>個<rt>こ</rt></ruby>セット",100,"message_card_set.jpg"],
-
-  ["工芸","クラフトバンド小物","クラフトバンド<ruby>小物<rt>こもの</rt></ruby>",200,"craft_band_item.jpg"],
-  ["工芸","クラフトバンドかご","クラフトバンドかご",300,"craft_band_basket.jpg"],
-  ["工芸","クラフトバンドコースター 2個セット","クラフトバンドコースター 2<ruby>個<rt>こ</rt></ruby>セット",100,"craft_band_coaster_set.jpg"],
-  ["工芸","クラフトバンドリース 2個セット","クラフトバンドリース 2<ruby>個<rt>こ</rt></ruby>セット",100,"craft_band_wreath_set.jpg"],
-  ["工芸","木工鉛筆立て","<ruby>木工<rt>もっこう</rt></ruby><ruby>鉛筆立<rt>えんぴつた</rt></ruby>て",300,"wooden_pencil_holder.jpg"],
-  ["工芸","木工写真立て","<ruby>木工<rt>もっこう</rt></ruby><ruby>写真立<rt>しゃしんた</rt></ruby>て",300,"wooden_photo_frame.jpg"],
-  ["工芸","寄木コースター","<ruby>寄木<rt>よせぎ</rt></ruby>コースター",200,"parquet_coaster.jpg"],
-  ["工芸","寄木キーホルダー","<ruby>寄木<rt>よせぎ</rt></ruby>キーホルダー",100,"parquet_keychain.jpg"],
-  ["工芸","クラフトバンド小物入れ","クラフトバンド<ruby>小物入<rt>こものい</rt></ruby>れ",400,"craft_band_container.jpg"]
-].map(function(item){
-  return {
-    group:item[0],
-    name:item[1],
-    nameHtml:item[2],
-    price:item[3],
-    image:"images/" + item[4]
-  };
-});
-
-const groupHtml = {
-  "手工芸":"<ruby>手工芸<rt>しゅこうげい</rt></ruby><ruby>班<rt>はん</rt></ruby>",
-  "園芸":"<ruby>園芸<rt>えんげい</rt></ruby><ruby>班<rt>はん</rt></ruby>",
-  "陶工":"<ruby>陶工<rt>とうこう</rt></ruby><ruby>班<rt>はん</rt></ruby>",
-  "リサイクル":"リサイクル<ruby>班<rt>はん</rt></ruby>",
-  "工芸":"<ruby>工芸<rt>こうげい</rt></ruby><ruby>班<rt>はん</rt></ruby>"
-};
-
-const moneyValues = [1000,500,100,50];
-
-const paymentPatterns = {
-  50:[50,100,500],
-  100:[100,500,1000],
-  200:[200,500,1000],
-  300:[300,500,1000],
-  400:[400,500,1000],
-  600:[600,1000],
-  1000:[1000,2000]
-};
-
-const messages = {
-  check:
-    "お<ruby>預<rt>あず</rt></ruby>かりと " +
-    "<ruby>商品代<rt>しょうひんだい</rt></ruby>と " +
-    "おつりを <ruby>確認<rt>かくにん</rt></ruby>してください",
-
-  selected:
-    "<ruby>渡<rt>わた</rt></ruby>す " +
-    "<ruby>金額<rt>きんがく</rt></ruby>を " +
-    "<ruby>確認<rt>かくにん</rt></ruby>してください",
+const groups=[["手工芸","handicraft","🧵","<ruby>手工芸<rt>しゅこうげい</rt></ruby>"],["園芸","gardening","🌱","<ruby>園芸<rt>えんげい</rt></ruby>"],["陶工","pottery","🏺","<ruby>陶工<rt>とうこう</rt></ruby>"],["リサイクル","recycle","♻️","リサイクル"],["工芸","craft","🧺","<ruby>工芸<rt>こうげい</rt></ruby>"]];
 
-  reselect:
-    "おつりを <ruby>選<rt>えら</rt></ruby>びなおしてください",
+const products=[
 
-  hasChange:
-    "おつりがあります",
-
-  noChange:
-    "おつりはありません",
-
-  tooLittle:
-    "おつりがたりません",
+["手工芸","ティッシュケース","ティッシュケース",200,"tissue_case.jpg"],["手工芸","ポーチ 小","ポーチ <ruby>小<rt>しょう</rt></ruby>",600,"pouch_small.jpg"],["手工芸","ポーチ 大","ポーチ <ruby>大<rt>だい</rt></ruby>",1000,"pouch_large.jpg"],["手工芸","バンド","バンド",100,"band.jpg"],["手工芸","マグネット 2個セット","マグネット 2<ruby>個<rt>こ</rt></ruby>セット",100,"magnet_set.jpg"],["手工芸","ヘアゴム 2個セット","ヘアゴム 2<ruby>個<rt>こ</rt></ruby>セット",100,"hair_gum_set.jpg"],["手工芸","マルチマット","マルチマット",1000,"multi_mat.jpg"],["手工芸","コースター ①","コースター ①",100,"coaster_1.jpg"],["手工芸","コースター ②","コースター ②",100,"coaster_2.jpg"],["手工芸","巾着袋","<ruby>巾着袋<rt>きんちゃくぶくろ</rt></ruby>",400,"drawstring_bag.jpg"],["手工芸","エコバッグ","エコバッグ",300,"eco_bag.jpg"],
 
-  tooMuch:
-    "おつりがおおすぎます"
-};
+["園芸","唐辛子","<ruby>唐辛子<rt>とうがらし</rt></ruby>",50,"chili_pepper.jpg"],["園芸","100円野菜","100<ruby>円<rt>えん</rt></ruby><ruby>野菜<rt>やさい</rt></ruby>",100,"vegetables.jpg"],["園芸","花苗 2個セット","<ruby>花苗<rt>はななえ</rt></ruby> 2<ruby>個<rt>こ</rt></ruby>セット",100,"flower_seedling_set.jpg"],["園芸","100円雑貨","100<ruby>円<rt>えん</rt></ruby><ruby>雑貨<rt>ざっか</rt></ruby>",100,"gardening_goods.jpg"],
 
-const $ = function(id){
-  return document.getElementById(id);
-};
+["陶工","お皿","お<ruby>皿<rt>さら</rt></ruby>",100,"plate.jpg"],["リサイクル","メッセージカード 2個セット","メッセージカード 2<ruby>個<rt>こ</rt></ruby>セット",100,"message_card_set.jpg"],
 
-const groupScreen = $("groupScreen");
-const registerScreen = $("registerScreen");
-const groupGrid = $("groupGrid");
-const groupBadge = $("groupBadge");
-const questionNumberElement = $("questionNumber");
-
-const productImage = $("productImage");
-const productFallback = $("productFallback");
-const productName = $("productName");
-const priceValue = $("priceValue");
+["工芸","クラフトバンド小物","クラフトバンド<ruby>小物<rt>こもの</rt></ruby>",200,"craft_band_item.jpg"],["工芸","クラフトバンドかご","クラフトバンドかご",300,"craft_band_basket.jpg"],["工芸","クラフトバンドコースター 2個セット","クラフトバンドコースター 2<ruby>個<rt>こ</rt></ruby>セット",100,"craft_band_coaster_set.jpg"],["工芸","クラフトバンドリース 2個セット","クラフトバンドリース 2<ruby>個<rt>こ</rt></ruby>セット",100,"craft_band_wreath_set.jpg"],["工芸","木工鉛筆立て","<ruby>木工<rt>もっこう</rt></ruby><ruby>鉛筆立<rt>えんぴつた</rt></ruby>て",300,"wooden_pencil_holder.jpg"],["工芸","木工写真立て","<ruby>木工<rt>もっこう</rt></ruby><ruby>写真立<rt>しゃしんた</rt></ruby>て",300,"wooden_photo_frame.jpg"],["工芸","寄木コースター","<ruby>寄木<rt>よせぎ</rt></ruby>コースター",200,"parquet_coaster.jpg"],["工芸","寄木キーホルダー","<ruby>寄木<rt>よせぎ</rt></ruby>キーホルダー",100,"parquet_keychain.jpg"],["工芸","クラフトバンド小物入れ","クラフトバンド<ruby>小物入<rt>こものい</rt></ruby>れ",400,"craft_band_container.jpg"]
 
-const paymentMoneyList = $("paymentMoneyList");
-const paymentTotalElement = $("paymentTotal");
+].map(x=>({group:x[0],name:x[1],nameHtml:x[2],price:x[3],image:"images/"+x[4]}));
 
-const displayPrice = $("displayPrice");
-const displayPayment = $("displayPayment");
-const displayChange = $("displayChange");
+const groupHtml={"手工芸":"<ruby>手工芸<rt>しゅこうげい</rt></ruby><ruby>班<rt>はん</rt></ruby>","園芸":"<ruby>園芸<rt>えんげい</rt></ruby><ruby>班<rt>はん</rt></ruby>","陶工":"<ruby>陶工<rt>とうこう</rt></ruby><ruby>班<rt>はん</rt></ruby>","リサイクル":"リサイクル<ruby>班<rt>はん</rt></ruby>","工芸":"<ruby>工芸<rt>こうげい</rt></ruby><ruby>班<rt>はん</rt></ruby>"};
 
-const selectedTotalElement = $("selectedTotal");
-const selectedMoneyBox = $("selectedMoneyBox");
-const moneyButtons = $("moneyButtons");
+const values=[1000,500,100,50,10],patterns={50:[50,100,500],100:[100,500,1000],200:[200,500,1000],300:[300,500,1000],400:[400,500,1000],600:[600,1000],1000:[1000,2000]};
 
-const message = $("message");
-const judgeLayer = $("judgeLayer");
-const judgeMark = $("judgeMark");
-const successLayer = $("successLayer");
-const successText = $("successText");
-const clearLayer = $("clearLayer");
+const msg={selected:"<ruby>渡<rt>わた</rt></ruby>す<ruby>金額<rt>きんがく</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>してください",reselect:"おつりを<ruby>選<rt>えら</rt></ruby>びなおしてください",has:"おつりがあります",none:"おつりはありません",little:"おつりがたりません",much:"おつりがおおすぎます"};
 
-let selectedGroup = "";
-let previousProductName = "";
-let questionNumber = 1;
-let correctCount = 0;
+const $=id=>document.getElementById(id);
 
-let paymentAmount = 0;
-let correctChange = 0;
-let paymentMoney = [];
-let selectedMoney = [];
-let locked = false;
+let group="",prev="",q=1,correct=0,pay=0,change=0,payMoney=[],selected=[],locked=false;
 
-/* 班ボタンを作る */
+groups.forEach(g=>{const b=document.createElement("button");b.className="group-button "+g[1];b.innerHTML=`<span class="group-icon">${g[2]}</span>${g[3]}`;b.onclick=()=>{group=g[0];prev="";q=1;correct=0;$("groupBadge").innerHTML=groupHtml[group];randomProduct()};$("groupGrid").appendChild(b)});
 
-groups.forEach(function(group){
-  const button = document.createElement("button");
+values.forEach(v=>{const b=document.createElement("button");b.className="money-button";b.innerHTML=`<img src="images/money_${v}.png" alt="${v}円"><div class="money-button-label">${v}<ruby>円<rt>えん</rt></ruby></div><span class="money-count" id="count${v}">0</span>`;b.querySelector("img").onerror=e=>e.target.style.display="none";b.onclick=()=>{if(locked)return;selected.push(v);updateSelected();$("message").innerHTML=msg.selected};$("moneyButtons").appendChild(b)});
 
-  button.className =
-    "group-button " + group.className;
+function show(name){$("groupScreen").classList.toggle("hidden",name!=="group");$("registerScreen").classList.toggle("hidden",name!=="register");scrollTo(0,0)}
 
-  button.dataset.group = group.id;
+function randomProduct(){let a=products.filter(p=>p.group===group),c=a.length>1?a.filter(p=>p.name!==prev):a,p=c[Math.floor(Math.random()*c.length)];prev=p.name;start(p)}
 
-  button.innerHTML =
-    '<span class="group-icon">' +
-    group.icon +
-    "</span>" +
-    group.label;
+function start(p){selected=[];locked=false;const a=patterns[p.price]||[p.price,1000];pay=a[Math.floor(Math.random()*a.length)];change=pay-p.price;payMoney=split(pay);$("questionNumber").textContent=q;$("productName").innerHTML=p.nameHtml;$("priceValue").textContent=p.price;$("displayPrice").textContent=p.price;$("displayPayment").textContent=pay;$("displayChange").textContent=change;$("paymentTotal").textContent=pay;$("productImage").style.display="block";$("productFallback").style.display="none";$("productImage").src=p.image;$("productImage").alt=p.name;$("productImage").onerror=()=>{$("productImage").style.display="none";$("productFallback").style.display="block";$("productFallback").innerHTML=p.nameHtml};showPayment();updateSelected();$("message").innerHTML="";$("successLayer").classList.remove("show");show("register")}
 
-  button.addEventListener("click",function(){
-    selectedGroup = group.id;
-    previousProductName = "";
-    questionNumber = 1;
-    correctCount = 0;
+function split(n){const a=[];values.forEach(v=>{while(n>=v){a.push(v);n-=v}});return a}
 
-    groupBadge.innerHTML =
-      groupHtml[selectedGroup];
+function moneyPic(v){const d=document.createElement("div");d.className="money-picture"+(v>=1000?" bill":"");d.innerHTML=`<img src="images/money_${v}.png" alt="${v}円"><div class="money-fallback">${v}<ruby>円<rt>えん</rt></ruby></div>`;const i=d.querySelector("img"),f=d.querySelector(".money-fallback");i.onerror=()=>{i.style.display="none";f.style.display="block"};return d}
 
-    startRandomProduct();
-  });
+function showPayment(){$("paymentMoneyList").innerHTML="";payMoney.forEach(v=>$("paymentMoneyList").appendChild(moneyPic(v)))}
 
-  groupGrid.appendChild(button);
-});
+function total(){return selected.reduce((a,b)=>a+b,0)}
 
-/* お金ボタンを作る */
+function updateSelected(){$("selectedTotal").textContent=total();values.forEach(v=>$("count"+v).textContent=selected.filter(x=>x===v).length);$("selectedMoneyBox").innerHTML="";selected.forEach(v=>$("selectedMoneyBox").appendChild(moneyPic(v)));$("selectedMoneyBox").scrollLeft=$("selectedMoneyBox").scrollWidth}
 
-moneyValues.forEach(function(value){
-  const button = document.createElement("button");
+$("resetButton").onclick=()=>{if(locked||!selected.length)return;selected.pop();updateSelected();$("message").innerHTML=msg.reselect};
 
-  button.className = "money-button";
-  button.dataset.value = value;
+$("noChangeButton").onclick=()=>{if(locked)return;locked=true;if(change===0){$("successText").innerHTML="ちょうどいただきました。<br>ありがとうございました！";answer(true)}else{$("message").innerHTML=msg.has;answer(false)}};
 
-  button.innerHTML =
-    '<img src="images/money_' +
-    value +
-    '.png" alt="' +
-    value +
-    '円">' +
+$("checkoutButton").onclick=()=>{if(locked)return;locked=true;const t=total();if(change>0&&t===change){$("successText").innerHTML="おつりをただしく<ruby>渡<rt>わた</rt></ruby>せました。<br>ありがとうございました！";answer(true)}else{$("message").innerHTML=change===0?msg.none:t<change?msg.little:msg.much;answer(false)}};
 
-    '<div class="money-button-label">' +
-    value +
-    '<ruby>円<rt>えん</rt></ruby>' +
-    "</div>" +
+function answer(ok){showJudge(ok);if(ok){correct++;setTimeout(()=>$("successLayer").classList.add("show"),800)}else setTimeout(()=>{locked=false;selected=[];updateSelected()},950)}
 
-    '<span class="money-count" id="count' +
-    value +
-    '">0</span>';
+function showJudge(ok){$("judgeMark").className=ok?"correct-mark":"wrong-mark";$("judgeLayer").classList.add("show");setTimeout(()=>$("judgeLayer").classList.remove("show"),700)}
 
-  const image = button.querySelector("img");
+$("nextButton").onclick=()=>{$("successLayer").classList.remove("show");if(correct>=10){$("clearLayer").classList.add("show");return}q++;randomProduct()};
 
-  image.addEventListener("error",function(){
-    image.style.display = "none";
-  });
+$("restartButton").onclick=()=>{q=1;correct=0;prev="";$("clearLayer").classList.remove("show");randomProduct()};
 
-  button.addEventListener("click",function(){
-    if(locked){
-      return;
-    }
+document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 
-    selectedMoney.push(value);
-    updateSelectedMoney();
+addEventListener("orientationchange",()=>setTimeout(()=>scrollTo(0,0),250));
 
-    message.innerHTML =
-      messages.selected;
-  });
+show("group");
 
-  moneyButtons.appendChild(button);
-});
-
-/* 画面切り替え */
-
-function showScreen(name){
-  groupScreen.classList.add("hidden");
-  registerScreen.classList.add("hidden");
-
-  if(name === "group"){
-    groupScreen.classList.remove("hidden");
-  }else{
-    registerScreen.classList.remove("hidden");
-  }
-
-  window.scrollTo(0,0);
-}
-
-/* 商品選択 */
-
-function startRandomProduct(){
-  const groupProducts =
-    products.filter(function(product){
-      return product.group === selectedGroup;
-    });
-
-  if(groupProducts.length === 0){
-    alert("この班には商品がありません。");
-    return;
-  }
-
-  let candidates = groupProducts;
-
-  if(groupProducts.length > 1){
-    candidates =
-      groupProducts.filter(function(product){
-        return product.name !== previousProductName;
-      });
-  }
-
-  const product =
-    candidates[
-      Math.floor(Math.random() * candidates.length)
-    ];
-
-  previousProductName = product.name;
-
-  startCheckout(product);
-}
-
-/* 問題開始 */
-
-function startCheckout(product){
-  selectedMoney = [];
-  locked = false;
-
-  makePayment(product.price);
-
-  questionNumberElement.textContent =
-    questionNumber;
-
-  productName.innerHTML =
-    product.nameHtml;
-
-  priceValue.textContent =
-    product.price;
-
-  displayPrice.textContent =
-    product.price;
-
-  displayPayment.textContent =
-    paymentAmount;
-
-  displayChange.textContent =
-    correctChange;
-
-  paymentTotalElement.textContent =
-    paymentAmount;
-
-  productImage.style.display = "block";
-  productFallback.style.display = "none";
-
-  productImage.src = product.image;
-  productImage.alt = product.name;
-
-  productImage.onerror = function(){
-    productImage.style.display = "none";
-    productFallback.style.display = "block";
-    productFallback.innerHTML = product.nameHtml;
-  };
-
-  showPaymentMoney();
-  updateSelectedMoney();
-
-  message.innerHTML =
-    messages.check;
-
-  successLayer.classList.remove("show");
-
-  showScreen("register");
-}
-
-/* 預かった金額を作る */
-
-function makePayment(price){
-  const possiblePayments =
-    paymentPatterns[price] || [price,1000];
-
-  paymentAmount =
-    possiblePayments[
-      Math.floor(
-        Math.random() *
-        possiblePayments.length
-      )
-    ];
-
-  correctChange =
-    paymentAmount - price;
-
-  paymentMoney =
-    splitMoney(paymentAmount);
-}
-
-/* 金額を金種に分ける */
-
-function splitMoney(total){
-  const result = [];
-  let remaining = total;
-
-  moneyValues.forEach(function(value){
-    while(remaining >= value){
-      result.push(value);
-      remaining -= value;
-    }
-  });
-
-  return result;
-}
-
-/* お金画像を作る */
-
-function makeMoneyPicture(value){
-  const wrapper =
-    document.createElement("div");
-
-  wrapper.className = "money-picture";
-
-  if(value >= 1000){
-    wrapper.classList.add("bill");
-  }
-
-  const image =
-    document.createElement("img");
-
-  image.src =
-    "images/money_" + value + ".png";
-
-  image.alt =
-    value + "円";
-
-  const fallback =
-    document.createElement("div");
-
-  fallback.className =
-    "money-fallback";
-
-  fallback.innerHTML =
-    value +
-    "<ruby>円<rt>えん</rt></ruby>";
-
-  image.addEventListener("error",function(){
-    image.style.display = "none";
-    fallback.style.display = "block";
-  });
-
-  wrapper.appendChild(image);
-  wrapper.appendChild(fallback);
-
-  return wrapper;
-}
-
-/* 預かったお金を表示 */
-
-function showPaymentMoney(){
-  paymentMoneyList.innerHTML = "";
-
-  paymentMoney.forEach(function(value){
-    paymentMoneyList.appendChild(
-      makeMoneyPicture(value)
-    );
-  });
-}
-
-/* 選んだ合計 */
-
-function getSelectedTotal(){
-  return selectedMoney.reduce(
-    function(total,value){
-      return total + value;
-    },
-    0
-  );
-}
-
-/* 選んだお金を表示 */
-
-function updateSelectedMoney(){
-  selectedTotalElement.textContent =
-    getSelectedTotal();
-
-  moneyValues.forEach(function(value){
-    const count =
-      selectedMoney.filter(
-        function(selectedValue){
-          return selectedValue === value;
-        }
-      ).length;
-
-    $("count" + value).textContent =
-      count;
-  });
-
-  selectedMoneyBox.innerHTML = "";
-
-  selectedMoney.forEach(function(value){
-    selectedMoneyBox.appendChild(
-      makeMoneyPicture(value)
-    );
-  });
-
-  selectedMoneyBox.scrollLeft =
-    selectedMoneyBox.scrollWidth;
-}
-
-/* ひとつ戻す */
-
-$("resetButton").addEventListener(
-  "click",
-  function(){
-    if(
-      locked ||
-      selectedMoney.length === 0
-    ){
-      return;
-    }
-
-    selectedMoney.pop();
-    updateSelectedMoney();
-
-    message.innerHTML =
-      messages.reselect;
-  }
-);
-
-/* おつりなし */
-
-$("noChangeButton").addEventListener(
-  "click",
-  function(){
-    if(locked){
-      return;
-    }
-
-    locked = true;
-
-    if(correctChange === 0){
-      successText.innerHTML =
-        "ちょうどいただきました。<br>" +
-        "ありがとうございました！";
-
-      correctAnswer();
-
-    }else{
-      message.innerHTML =
-        messages.hasChange;
-
-      wrongAnswer();
-    }
-  }
-);
-
-/* 会計する */
-
-$("checkoutButton").addEventListener(
-  "click",
-  function(){
-    if(locked){
-      return;
-    }
-
-    locked = true;
-
-    const selectedTotal =
-      getSelectedTotal();
-
-    if(
-      correctChange > 0 &&
-      selectedTotal === correctChange
-    ){
-      successText.innerHTML =
-        "おつりをただしく " +
-        "<ruby>渡<rt>わた</rt></ruby>せました。<br>" +
-        "ありがとうございました！";
-
-      correctAnswer();
-
-    }else{
-      if(correctChange === 0){
-        message.innerHTML =
-          messages.noChange;
-
-      }else if(
-        selectedTotal < correctChange
-      ){
-        message.innerHTML =
-          messages.tooLittle;
-
-      }else{
-        message.innerHTML =
-          messages.tooMuch;
-      }
-
-      wrongAnswer();
-    }
-  }
-);
-
-/* 正解 */
-
-function correctAnswer(){
-  correctCount++;
-
-  showJudge(true);
-
-  setTimeout(function(){
-    successLayer.classList.add("show");
-  },800);
-}
-
-/* 不正解 */
-
-function wrongAnswer(){
-  showJudge(false);
-
-  setTimeout(function(){
-    locked = false;
-    selectedMoney = [];
-    updateSelectedMoney();
-  },950);
-}
-
-/* マル・バツ */
-
-function showJudge(isCorrect){
-  judgeMark.className =
-    isCorrect
-      ? "correct-mark"
-      : "wrong-mark";
-
-  judgeLayer.classList.add("show");
-
-  setTimeout(function(){
-    judgeLayer.classList.remove("show");
-  },700);
-}
-
-/* 次の問題 */
-
-$("nextButton").addEventListener(
-  "click",
-  function(){
-    successLayer.classList.remove("show");
-
-    if(correctCount >= 10){
-      clearLayer.classList.add("show");
-      return;
-    }
-
-    questionNumber++;
-    startRandomProduct();
-  }
-);
-
-/* もう一度 */
-
-$("restartButton").addEventListener(
-  "click",
-  function(){
-    questionNumber = 1;
-    correctCount = 0;
-    previousProductName = "";
-
-    clearLayer.classList.remove("show");
-
-    startRandomProduct();
-  }
-);
-
-/* ダブルタップ拡大防止 */
-
-document.addEventListener(
-  "dblclick",
-  function(event){
-    event.preventDefault();
-  },
-  {
-    passive:false
-  }
-);
-
-/* 画面回転後に表示位置を調整 */
-
-window.addEventListener(
-  "orientationchange",
-  function(){
-    setTimeout(function(){
-      window.scrollTo(0,0);
-    },250);
-  }
-);
-
-showScreen("group");
 </script>
 
 </body>
+
 </html>
